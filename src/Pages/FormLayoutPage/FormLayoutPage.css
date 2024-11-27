@@ -1,0 +1,20 @@
+.form-section {
+    display: flex;
+    width: 100dvw;
+    height: 100dvh;
+    background-image: url("/img/bg-login.jpg");
+    background-position: center;
+    background-size: cover;
+}
+
+.form-container {
+    display: flex;
+    justify-self: flex-start;
+    min-width: 280px;
+    width: 25dvw;
+    margin: 20px;
+    border: var(--border-line);
+    border-radius: 8px;
+    box-shadow: var(--shadow-box);
+    background-color: var(--bg-form-color);
+}

@@ -1,0 +1,112 @@
+.aside-nav {
+    display: flex;
+    align-self: flex-start;
+    flex-direction: column;
+    /* justify-content: space-between; */
+    align-items: center;
+    min-width: 15dvw;
+    width: 240px;
+    background-color: var(--bg-primary-color);
+    height: 100dvh;
+    border-right: var(--border-line);
+}
+
+.aside-nav .sign-in-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    gap: 20px;
+    width: 100%;
+    height: 12dvh;
+    border-bottom: var(--border-line);
+}
+
+.aside-nav .middle-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 76dvh;
+}
+
+.aside-nav .middle-container .user-info {
+    display: flex;
+    justify-content: center;
+    padding: 0px 20px 0px 0px;
+    margin: 20px 0px 20px 0px;
+    gap: 15px;
+}
+
+.aside-nav .middle-container .user-info .user-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    box-shadow: var(--shadow-box);
+    overflow: hidden;
+    transition: 0.5s;
+}
+
+.aside-nav .middle-container .user-info .user-img:hover {
+    box-shadow: var(--hover-shadow-box);
+}
+
+.aside-nav .middle-container .user-info .user-img img {
+    width: 100%;
+}
+
+.aside-nav .middle-container .user-info .user-name {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+}
+
+.aside-nav .middle-container .user-info .user-name .name {
+    color: var(--text-color);
+    font-size: 15px;
+}
+
+.aside-nav .middle-container .user-info .user-name .user-link {
+    font-size: 12px;
+}
+
+.aside-nav .middle-container .user-info .user-name .user-link .link:hover {
+    text-decoration: underline;
+}
+
+.aside-nav .middle-container .nav-menu {
+    gap: 5px;
+    list-style-type: none;
+    margin-top: 10px;
+    overflow: hidden;
+}
+
+.aside-nav .middle-container .nav-menu ul {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.aside-nav .middle-container .nav-menu ul li {
+    display: block;
+    width: 100%;
+    background-color: var(--bg-secondary-color);
+    padding: 5px 0px 5px 40px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.aside-nav .middle-container .nav-menu ul li:hover {
+    box-shadow: inset 0px 0px 4px 2px var(--primary-shadow-color);
+}
+
+.aside-nav .middle-container .nav-menu ul li .link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+}
+
+.aside-nav .middle-container .nav-menu ul li .link .icon {
+    font-size: 17px;
+    margin-bottom: 1px;
+}

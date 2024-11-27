@@ -1,0 +1,22 @@
+/* REST OF THE CSS STYLE IS ON LoginForm.css */
+
+.login-container .registration-form {
+    display: flex;
+    flex-direction: column;
+    /* gap: 5px; */
+    padding: 20px;
+    width: 100%;
+    border-radius: 8px;
+    border: var(--border-line);
+    background-color: var(--bg-form-color);
+}
+
+.login-container .registration-form .btn-container {
+    display: flex;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.login-container .registration-form .btn-container .btn-signup {
+    width: 100%;
+}

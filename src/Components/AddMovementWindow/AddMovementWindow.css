@@ -1,0 +1,16 @@
+.add-movement-window {
+    display: flex;
+    justify-content: space-around;
+
+    /* min-width: 30dvw;
+    max-width: 35dvw;
+    max-height: 20dvh; */
+
+    gap: 30px;
+    border: 2px solid rgb(180, 180, 180);
+    border-radius: 5px;
+    background-color: var(--bg-secondary-color);
+    color: var(--text-color);
+    box-shadow: var(--shadow-box);
+    transition: 0.9s;
+}

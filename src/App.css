@@ -1,0 +1,161 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Merriweather+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+@font-face {
+    font-family: "Starjedi"; /* Name your font family */
+    src: url("fonts/Starjedi.ttf"); /* Locate the .ttf file within your directory*/
+}
+
+:root {
+    --bg-primary-color: #1a1d1d;
+    --bg-secondary-color: #171414;
+    --primary-shadow-color: #65b9b9;
+    --secondary-shadow-color: rgba(0, 255, 55, 0.885);
+    --cancel-shadow-color: rgba(248, 51, 51, 0.808);
+    --modal-shadow: 0 5px 20px 0 rgba(101, 185, 185, 0.527);
+
+    --text-color: #f2f2f2;
+    --link-color: rgb(105, 105, 255);
+    --border-color: rgba(139, 139, 139, 0.433);
+    --shadow-box: 0px 0px 5px 3px var(--primary-shadow-color);
+    --hover-shadow-box: 0px 0px 5px 3px var(--secondary-shadow-color);
+    --border-line: 1px solid rgba(139, 139, 139, 0.433);
+
+    --bg-form-color: #1a1d1dad;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Merriweather Sans", sans-serif;
+    /* font-family: "Starjedi", sans-serif; */
+    /* width: 100dvw;
+    height: 100dvh; */
+}
+
+/* GLOBAL STYLES */
+
+.btn {
+    border: none;
+    background-color: var(--bg-secondary-color);
+    padding: 6px 11px;
+    border-radius: 3px;
+    color: var(--text-color);
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    box-shadow: var(--shadow-box);
+    transition: 1s;
+}
+
+.btn:hover {
+    box-shadow: var(--hover-shadow-box);
+}
+
+.link {
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+.link:hover {
+    text-shadow: var(--hover-shadow-box);
+}
+
+.form-group input {
+    width: 100%;
+    padding-left: 5px;
+    height: 25px;
+    border: var(--border-line);
+    border-radius: 3px;
+    background-color: var(--bg-secondary-color);
+    color: rgb(190, 190, 190);
+    font-size: 12px;
+    outline: none;
+}
+
+.form-group label {
+    color: var(--text-color);
+    font-size: 10px;
+}
+
+.window {
+    display: flex;
+    padding: 10px;
+    border: 2px solid rgb(180, 180, 180);
+    border-radius: 5px;
+    background-color: var(--bg-secondary-color);
+    color: var(--text-color);
+    box-shadow: var(--shadow-box);
+    transition: 0.9s;
+}
+
+/* LOADING SPINNER */
+
+.loading-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100dvh;
+    min-width: 100dvw;
+    width: 100dvw;
+    height: 100dvh;
+    background-color: var(--bg-primary-color);
+}
+
+/* .loading-page .lds-ripple,
+.lds-ripple div {
+    /* box-sizing: border-box; */
+/* } */
+
+.loading-page .lds-ripple {
+    color: var(--primary-shadow-color);
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+}
+
+.loading-page .lds-ripple {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+}
+.loading-page .lds-ripple div {
+    position: absolute;
+    border: 5px solid currentColor;
+    opacity: 1;
+    border-radius: 50%;
+    animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+.loading-page .lds-ripple div:nth-child(2) {
+    animation-delay: -0.5s;
+}
+@keyframes lds-ripple {
+    0% {
+        top: 36px;
+        left: 36px;
+        width: 8px;
+        height: 8px;
+        opacity: 0;
+    }
+    4.9% {
+        top: 36px;
+        left: 36px;
+        width: 8px;
+        height: 8px;
+        opacity: 0;
+    }
+    5% {
+        top: 36px;
+        left: 36px;
+        width: 8px;
+        height: 8px;
+        opacity: 1;
+    }
+    100% {
+        top: 0;
+        left: 0;
+        width: 80px;
+        height: 80px;
+        opacity: 0;
+    }
+}
