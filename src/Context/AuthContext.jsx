@@ -13,6 +13,7 @@ export const AuthContextProvider = ({ children }) => {
 
     const logout = () => {
         sessionStorage.removeItem("access_token");
+        sessionStorage.removeItem("user_info");
         setIsAuthenticatedUser(false);
     };
 

@@ -1,4 +1,5 @@
 import React from "react";
+import { useAuthContext } from "../../Context/AuthContext";
 import { FaHouse, FaCodiepie } from "react-icons/fa6";
 import { TbCashRegister } from "react-icons/tb";
 import { BiCategoryAlt } from "react-icons/bi";
@@ -11,20 +12,28 @@ import { Link } from "react-router-dom";
 import "./Sidebar.css";
 
 const Sidebar = () => {
+    const { isAuthenticatedUser, logout } = useAuthContext();
     const { fullname, id, photo } = JSON.parse(sessionStorage.getItem("user_info"));
     const edit_profile_url = `/profile/${id}`;
-    console.log(photo);
     const photo_src = `/img/${photo}`;
 
     return (
         <aside className="aside-nav">
             <div className="sign-in-container">
-                <Link to="/in/login">
-                    <button className="btn btn-login">Login</button>
-                </Link>
-                <Link to="/in/register">
-                    <button className="btn btn-sing-up">Sign up</button>
-                </Link>
+                {isAuthenticatedUser ? (
+                    <button className="btn btn-logout" onClick={logout}>
+                        Logout
+                    </button>
+                ) : (
+                    <>
+                        <Link to="/in/login">
+                            <button className="btn btn-login">Login</button>
+                        </Link>
+                        <Link to="/in/register">
+                            <button className="btn btn-sing-up">Sign up</button>
+                        </Link>
+                    </>
+                )}
             </div>
             <div className="middle-container">
                 <div className="user-info">

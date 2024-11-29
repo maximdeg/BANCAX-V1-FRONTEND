@@ -94,11 +94,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100dvh;
-    min-width: 100dvw;
-    width: 100dvw;
-    height: 100dvh;
-    background-color: var(--bg-primary-color);
+    height: 100%;
+    width: 100%;
+    /* width: 100dvw; */
+    /* height: 100dvh; */
+    background-color: transparent;
 }
 
 /* .loading-page .lds-ripple,

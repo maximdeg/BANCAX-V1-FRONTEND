@@ -6,11 +6,12 @@ import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute.jsx";
 import "./App.css";
 
 const HomePage = lazy(() => import("./Pages/HomePage/HomePage.jsx"));
-const MovementsPage = lazy(() => import("./Pages/MovementsPage/MovementsPage.jsx"));
-const SettingsPage = lazy(() => import("./Pages/SettingsPage/SettingsPage.jsx"));
 const LayoutPage = lazy(() => import("./Pages/LayoutPage/LayoutPage.jsx"));
 const LoginForm = lazy(() => import("./Components/LoginForm/LoginForm.jsx"));
+const SettingsPage = lazy(() => import("./Pages/SettingsPage/SettingsPage.jsx"));
+const MovementsPage = lazy(() => import("./Pages/MovementsPage/MovementsPage.jsx"));
 const FormLayoutPage = lazy(() => import("./Pages/FormLayoutPage/FormLayoutPage.jsx"));
+const EditProfilePage = lazy(() => import("./Pages/EditProfilePage/EditProfilePage.jsx"));
 const RegistrationForm = lazy(() => import("./Components/RegistrationForm/RegistrationForm.jsx"));
 const ResetPasswordForm = lazy(() => import("./Components/ResetPasswordForm/ResetPasswordForm.jsx"));
 const ForgotPasswordForm = lazy(() => import("./Components/ForgotPasswordForm/ForgotPasswordForm.jsx"));
@@ -24,7 +25,7 @@ function App() {
                         <Route index element={<HomePage />} />
                         <Route path="movements" element={<MovementsPage />} />
                         <Route path="settings" element={<SettingsPage />} />
-                        <Route path="profile/:id" element={<SettingsPage />} />
+                        <Route path="profile/:id" element={<EditProfilePage />} />
                     </Route>
                 </Route>
                 <Route path="/in" element={<FormLayoutPage />}>
