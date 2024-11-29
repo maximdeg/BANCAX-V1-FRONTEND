@@ -1,12 +1,15 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import "./ResetPasswordForm.css";
 
 const ResetPasswordForm = () => {
+    const { token } = useParams();
+
+    console.log(token);
     return (
         <div className="login-container">
-            <h2> Password Reset Puto</h2>
+            <h2> Password Reset </h2>
             {/* <h3>Welcome back!</h3> */}
             <form action="" className="login-form">
                 <div className="form-group">

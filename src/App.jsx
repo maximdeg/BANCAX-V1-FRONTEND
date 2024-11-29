@@ -15,6 +15,7 @@ const EditProfilePage = lazy(() => import("./Pages/EditProfilePage/EditProfilePa
 const RegistrationForm = lazy(() => import("./Components/RegistrationForm/RegistrationForm.jsx"));
 const ResetPasswordForm = lazy(() => import("./Components/ResetPasswordForm/ResetPasswordForm.jsx"));
 const ForgotPasswordForm = lazy(() => import("./Components/ForgotPasswordForm/ForgotPasswordForm.jsx"));
+const VerificationConfirmationPage = lazy(() => import("./Pages/VerificationConfirmationPage/VerificationConfirmationPage.jsx"));
 
 function App() {
     return (
@@ -23,8 +24,8 @@ function App() {
                 <Route element={<ProtectedRoute />}>
                     <Route path="/" element={<LayoutPage />}>
                         <Route index element={<HomePage />} />
-                        <Route path="movements" element={<MovementsPage />} />
                         <Route path="settings" element={<SettingsPage />} />
+                        <Route path="movements" element={<MovementsPage />} />
                         <Route path="profile/:id" element={<EditProfilePage />} />
                     </Route>
                 </Route>
@@ -33,8 +34,10 @@ function App() {
                     <Route path="login" element={<LoginForm />} />
                     <Route path="register" element={<RegistrationForm />} />
                     <Route path="forgot-password" element={<ForgotPasswordForm />} />
-                    <Route path="reset-password" element={<ResetPasswordForm />} />
+                    <Route path="reset-password/:token" element={<ResetPasswordForm />} />
+                    <Route path="verify/:verification_token" element={<VerificationConfirmationPage />} />
                 </Route>
+                <Route path="*" element={<h1>404</h1>} />
             </Routes>
         </Suspense>
     );
