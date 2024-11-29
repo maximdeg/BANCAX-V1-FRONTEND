@@ -1,23 +1,61 @@
-import React from "react";
-import "./ForgotPasswordForm.css";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
 import ENV from "../../env.js";
-import { getUnnauthenticatedHeaders } from "../../utils/Headers";
+import LoadingDots from "../LoadingDots/LoadingDots.jsx";
+import { Link } from "react-router-dom";
 import { POST } from "../../fetching/http.fetching";
+import { getUnnauthenticatedHeaders } from "../../utils/Headers";
+import "./ForgotPasswordForm.css";
 
 const ForgotPasswordForm = () => {
-    const handleSubmitEmail = async (e) => {
-        e.preventDefault();
+    const [outputMessage, setOutputMessage] = useState("");
+    const [emailAmount, setEmailAmount] = useState(0);
+    const [isSendingEmail, setIsSendingEmail] = useState(false);
 
-        const email = e.target.email.value;
-        console.log(email);
-
-        const response = await POST(`${ENV.API_URL}/api/v1/auth/forgot-password`, {
-            headers: getUnnauthenticatedHeaders(),
-            body: JSON.stringify({ email }),
+    const setOutputState = (message) => {
+        setOutputMessage(message);
+        setIsSendingEmail(() => {
+            return false;
         });
+    };
 
-        console.log(response);
+    const handleSubmitEmail = async (e) => {
+        try {
+            e.preventDefault();
+
+            setIsSendingEmail(() => {
+                return true;
+            });
+
+            const email = e.target.email.value;
+
+            if (!email) {
+                return setOutputState("Please enter your email.");
+            }
+
+            if (emailAmount !== 0) {
+                return setOutputState(
+                    "We have already sent an email to this address: " +
+                        email +
+                        ". Please wait 1 hour before requesting another recovery password email."
+                );
+            }
+
+            const response = await POST(`${ENV.API_URL}/api/v1/auth/forgot-password`, {
+                headers: getUnnauthenticatedHeaders(),
+                body: JSON.stringify({ email }),
+            });
+
+            if (response.ok) {
+                setOutputState("Email sent successfully to " + email + ". Please also check your spam folder.");
+                return setEmailAmount((currentAmount) => {
+                    return currentAmount + 1;
+                });
+            } else {
+                setOutputState("The email is not correct. Please try again or sign up with us.");
+            }
+        } catch (err) {
+            console.log(err);
+        }
     };
     return (
         <div className="login-container">
@@ -32,6 +70,11 @@ const ForgotPasswordForm = () => {
                         Sign Up
                     </Link>
                 </span>
+                {outputMessage && (
+                    <div className="email-sent">
+                        <p>{outputMessage}</p>
+                    </div>
+                )}
             </div>
             <form className="login-form" onSubmit={(e) => handleSubmitEmail(e)}>
                 <div className="form-group">
@@ -39,7 +82,13 @@ const ForgotPasswordForm = () => {
                     <input type="email" name="email" id="email" />
                 </div>
                 <div className="btn-container">
-                    <button className="btn btn-signin">Send email</button>
+                    {!isSendingEmail ? (
+                        <button className="btn btn-signin">Send email</button>
+                    ) : (
+                        <div className="btn btn-loading">
+                            <LoadingDots />
+                        </div>
+                    )}
                 </div>
             </form>
             <div className="link-container">
