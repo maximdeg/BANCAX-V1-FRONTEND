@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
-import "./VerificationConfirmationPage.css";
-import { GET } from "../../fetching/http.fetching";
 import { useParams } from "react-router-dom";
 import ENV from "../../env";
 import { getUnnauthenticatedHeaders } from "../../utils/Headers";
+import { GET } from "../../fetching/http.fetching";
+import "./VerificationConfirmationPage.css";
 
 const VerificationConfirmation = () => {
     const { verification_token } = useParams();

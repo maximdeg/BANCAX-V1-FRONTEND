@@ -11,7 +11,7 @@ const MovementsWindow = () => {
             <div className="movements-title">
                 <h2>Movements</h2>
             </div>
-            {isLoadingMovements ? <LoadingSpinner /> : <MovementsList movements={movements} />}
+            {isLoadingMovements ? <LoadingSpinner /> : <MovementsList movements={movements.reverse()} />}
         </div>
     );
 };

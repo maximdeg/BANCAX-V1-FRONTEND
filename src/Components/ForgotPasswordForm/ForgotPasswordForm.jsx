@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ENV from "../../env.js";
 import LoadingDots from "../LoadingDots/LoadingDots.jsx";
 import { Link } from "react-router-dom";
-import { POST } from "../../fetching/http.fetching";
+import { PUT } from "../../fetching/http.fetching";
 import { getUnnauthenticatedHeaders } from "../../utils/Headers";
 import "./ForgotPasswordForm.css";
 
@@ -28,6 +28,8 @@ const ForgotPasswordForm = () => {
 
             const email = e.target.email.value;
 
+            console.log("FRONTEND:", email);
+
             if (!email) {
                 return setOutputState("Please enter your email.");
             }
@@ -40,7 +42,7 @@ const ForgotPasswordForm = () => {
                 );
             }
 
-            const response = await POST(`${ENV.API_URL}/api/v1/auth/forgot-password`, {
+            const response = await PUT(`${ENV.API_URL}/api/v1/auth/forgot-password`, {
                 headers: getUnnauthenticatedHeaders(),
                 body: JSON.stringify({ email }),
             });

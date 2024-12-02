@@ -31,6 +31,12 @@ const LoginForm = () => {
                 body: JSON.stringify(form_values_object),
             });
 
+            if (!response.ok) {
+                // TODO: SHOW ERROR MESSAGE HERE
+                console.log(response.payload.detail);
+                return;
+            }
+
             const access_token = response.payload.token;
 
             // console.log(response.payload);
@@ -39,7 +45,7 @@ const LoginForm = () => {
             setIsAuthenticatedUser(true);
             navigate("/");
         } catch (err) {
-            console.error(err.message);
+            console.dir(err);
             // TODO: SHOW ERROR MESSAGE HERE
         }
     };

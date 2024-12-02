@@ -27,7 +27,6 @@ const CustomSelect = ({ label, options, handleChange }) => {
     const dropdownRef = useRef(null);
 
     const handleOptionClick = (e) => {
-        // console.log(e.target.textContent);
         setLabelState(e.target.textContent);
         handleChange(e.target.textContent);
         setIsOpen(!isOpen);

@@ -9,7 +9,9 @@ const TotalBalanceWindow = () => {
     const [totalBalance, setTotalBalance] = useState(0);
 
     useEffect(() => {
-        setTotalBalance(movements.reduce((acc, movement) => acc + movement.amount, 0));
+        setTotalBalance((prevTotalBalance) => {
+            return movements.reduce((acc, movement) => acc + movement.amount, 0);
+        });
     }, [movements]);
 
     return (

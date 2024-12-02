@@ -8,16 +8,19 @@ import { extractFormData } from "../../utils/extractFormData";
 import { useForm } from "../../Hooks/useForm";
 import { POST } from "../../fetching/http.fetching";
 import ENV from "../../env";
-// import { RiCloseLine } from "react-icons/ri";
+import { useGlobalContext } from "../../Context/GlobalContext";
 
 const ModalTransaction = ({ label, setIsModalOpen }) => {
     // FIXME:
     // TODO: Change all session storages for global context
 
+    const today = new Date().toISOString().split("T")[0];
+    const { setLastUpdated } = useGlobalContext();
+
     const { sources, categories, id } = JSON.parse(sessionStorage.getItem("user_info"));
     const sourceOptions = sources.map((source) => ({ value: source.name, color: source.color, id: source._id }));
     const categoryOptions = categories.map((category) => ({ value: category.name, color: category.color, id: category._id }));
-    const [selectedDate, setSelectedDate] = useState("1997-04-18");
+    const [selectedDate, setSelectedDate] = useState(today);
     const formRef = useRef(null);
 
     const [selectedSourceState, setSelectedSourceState] = useState(sources[0]);
@@ -64,10 +67,16 @@ const ModalTransaction = ({ label, setIsModalOpen }) => {
 
             // TODO: One of this form variables saves if the remember checkbox is checked, manage to save the session
 
-            const response = await POST(`${ENV.API_URL}/api/v1/transactions`, {
+            const response = await POST(`${ENV.API_URL}/api/v1/transactions/${id}`, {
                 headers: getAuthenticatedHeaders(),
                 body: JSON.stringify(form_values_object),
             });
+
+            if (!response.ok) {
+                // TODO: SHOW ERROR MESSAGE HERE
+                console.error(response.payload.detail);
+                return;
+            }
 
             console.log({ response });
         } catch (err) {
