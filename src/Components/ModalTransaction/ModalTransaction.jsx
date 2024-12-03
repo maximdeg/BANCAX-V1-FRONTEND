@@ -15,16 +15,18 @@ const ModalTransaction = ({ label, setIsModalOpen }) => {
     // TODO: Change all session storages for global context
 
     const today = new Date().toISOString().split("T")[0];
-    const { setLastUpdated } = useGlobalContext();
+    const { getStorageUserInfo, getSourcesAndCategoriesFromStorage, setLastUpdated } = useGlobalContext();
 
-    const { sources, categories, id } = JSON.parse(sessionStorage.getItem("user_info"));
-    const sourceOptions = sources.map((source) => ({ value: source.name, color: source.color, id: source._id }));
-    const categoryOptions = categories.map((category) => ({ value: category.name, color: category.color, id: category._id }));
+    const { id } = getStorageUserInfo();
+    const { activeSources, activeCategories } = getSourcesAndCategoriesFromStorage();
+
+    const sourceOptions = activeSources.map((source) => ({ value: source.name, color: source.color, id: source._id }));
+    const categoryOptions = activeCategories.map((category) => ({ value: category.name, color: category.color, id: category._id }));
     const [selectedDate, setSelectedDate] = useState(today);
     const formRef = useRef(null);
 
-    const [selectedSourceState, setSelectedSourceState] = useState(sources[0]);
-    const [selectedCategoryState, setSelectedCategoryState] = useState(categories[0]);
+    const [selectedSourceState, setSelectedSourceState] = useState(sourceOptions[0]);
+    const [selectedCategoryState, setSelectedCategoryState] = useState(categoryOptions[0]);
 
     const form_fields = {
         amount: "",
@@ -47,6 +49,7 @@ const ModalTransaction = ({ label, setIsModalOpen }) => {
     const handleChangeDate = (event) => {
         const date = new Date(event.target.value);
         const formattedDate = date.toISOString().split("T")[0];
+        console.log(formattedDate);
         setSelectedDate(formattedDate);
     };
 
@@ -63,7 +66,9 @@ const ModalTransaction = ({ label, setIsModalOpen }) => {
             form_values_object.category = selectedCategoryState;
             form_values_object.amount = label === "Withdraw" ? form_values_object.amount - form_values_object.amount * 2 : form_values_object.amount;
             //FIXME: solve the date saving, right now mongoose is saving by default
-            form_values_object.date = selectedDate ? selectedDate.toString() : new Date().toISOString().split("T")[0];
+            form_values_object.date = selectedDate.toString();
+
+            console.log(form_values_object);
 
             const response = await POST(`${ENV.API_URL}/api/v1/transactions/${id}`, {
                 headers: getAuthenticatedHeaders(),
@@ -117,15 +122,15 @@ const ModalTransaction = ({ label, setIsModalOpen }) => {
                                 <input type="date" name="date" id="date" value={selectedDate} onChange={handleChangeDate} />
                             </div>
                             <button type="submit" style={{ display: "none" }} />
+                            <div className="modalActions">
+                                <div className="actionsContainer">
+                                    <button className="cancelBtn" onClick={() => setIsModalOpen(false)}>
+                                        Cancel
+                                    </button>
+                                    <button className="submitBtn">Add deposit</button>
+                                </div>
+                            </div>
                         </form>
-                    </div>
-                    <div className="modalActions">
-                        <div className="actionsContainer">
-                            <button className="cancelBtn" onClick={() => setIsModalOpen(false)}>
-                                Cancel
-                            </button>
-                            <button className="submitBtn">Add deposit</button>
-                        </div>
                     </div>
                 </div>
             </div>

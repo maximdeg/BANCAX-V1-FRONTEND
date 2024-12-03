@@ -9,7 +9,7 @@ import { getAuthenticatedHeaders } from "../../utils/Headers";
 import { useGlobalContext } from "../../Context/GlobalContext";
 
 const SettingsPage = () => {
-    const { getSourcesAndCategoriesFromStorage, setStorageUserInfo } = useGlobalContext();
+    const { getSourcesAndCategoriesFromStorage, setStorageUserInfo, getStorageUserInfo } = useGlobalContext();
     const { activeSources, activeCategories } = getSourcesAndCategoriesFromStorage();
     const [sourcesListState, setSourcesListState] = useState(activeSources);
     const [categoriesListState, setCategoriesListState] = useState(activeCategories);
@@ -34,7 +34,7 @@ const SettingsPage = () => {
             };
             const form_values_object = extractFormData(form_fields, form_values);
 
-            const user = JSON.parse(sessionStorage.getItem("user_info"));
+            const user = getStorageUserInfo();
 
             user[property].push(form_values_object);
 
@@ -47,7 +47,7 @@ const SettingsPage = () => {
 
             setStorageUserInfo("user_info", new_user_data);
 
-            setStates(user, property);
+            setStates(new_user_data, property);
         } catch (err) {
             console.log(err.message);
         }
@@ -57,7 +57,7 @@ const SettingsPage = () => {
         try {
             e.preventDefault();
 
-            const user = JSON.parse(sessionStorage.getItem("user_info"));
+            const user = getStorageUserInfo();
 
             user[property].forEach((item) => {
                 if (item._id === id) {

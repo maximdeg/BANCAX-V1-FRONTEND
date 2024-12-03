@@ -1,10 +1,11 @@
 import React from "react";
 import useMovements from "../../Hooks/useMovements";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
+import { useGlobalContext } from "../../Context/GlobalContext";
 import "./MovementsWindow.css";
 
 const MovementsWindow = () => {
-    const { movements, isLoadingMovements } = useMovements();
+    const { movements, isLoadingMovements } = useGlobalContext();
 
     const movementOrderedByDate = movements.sort((a, b) => new Date(b.date) - new Date(a.date));
 
@@ -33,10 +34,13 @@ const MovementsList = ({ movements }) => {
 
 const MovementCard = ({ movement }) => {
     const { category, source, amount, description, date } = movement;
+
+    const formattedDate = new Date(date).toLocaleDateString("es-AR");
+
     return (
         <div className="movement-card">
             <div>
-                <div>{date.split("T")[0]}</div>
+                <div>{formattedDate}</div>
                 <div style={amount > 0 ? { color: "green" } : { color: "red" }}>{amount}</div>
                 <div>{source}</div>
             </div>
