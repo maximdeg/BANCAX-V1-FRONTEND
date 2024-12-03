@@ -1,5 +1,4 @@
 import AddCategoryWindow from "./AddCetegoryWindow/AddCategoryWindow";
-import AddMovementWindow from "./AddMovementWindow/AddMovementWindow";
 import AddSourceWindow from "./AddSourceWindow/AddSourceWindow";
 import ColorsConfigWindow from "./ColorsConfigWindow/ColorsConfigWindow";
 import Footer from "./Footer/Footer";
@@ -15,7 +14,6 @@ import TotalBalanceWindow from "./TotalBalanceWindow/TotalBalanceWindow";
 
 export {
     AddCategoryWindow,
-    AddMovementWindow,
     AddSourceWindow,
     ColorsConfigWindow,
     Footer,

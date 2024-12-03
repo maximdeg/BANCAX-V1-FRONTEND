@@ -6,12 +6,15 @@ import "./MovementsWindow.css";
 const MovementsWindow = () => {
     const { movements, isLoadingMovements } = useMovements();
 
+    const movementOrderedByDate = movements.sort((a, b) => new Date(b.date) - new Date(a.date));
+
     return (
         <div className="movements-window">
             <div className="movements-title">
                 <h2>Movements</h2>
             </div>
-            {isLoadingMovements ? <LoadingSpinner /> : <MovementsList movements={movements.reverse()} />}
+            {/* TODO: ORDER MOVEMENTS BY DATE DESCENDING */}
+            {isLoadingMovements ? <LoadingSpinner /> : <MovementsList movements={movementOrderedByDate} />}
         </div>
     );
 };

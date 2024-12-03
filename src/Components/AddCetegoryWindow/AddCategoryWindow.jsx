@@ -1,17 +1,16 @@
 import React, { useState } from "react";
-import { useGlobalContext } from "../../Context/GlobalContext";
+import { ImBin2 } from "react-icons/im";
+
 import "./AddCategoryWindow.css";
 
-const AddCategoryWindow = () => {
-    const { handleAddForm } = useGlobalContext();
-
+const AddCategoryWindow = ({ handleAddForm, list }) => {
     return (
         <div className="window add-category-window">
             <h1>Categories</h1>
             <div className="window-add-list-container">
                 <div className="window-list-container">
                     <h2>Category List</h2>
-                    <CategoryList />
+                    <CategoryList list={list.reverse()} />
                 </div>
                 <div className="window-add-container">
                     <h2>Add new</h2>
@@ -37,11 +36,7 @@ const AddCategoryWindow = () => {
 
 export default AddCategoryWindow;
 
-const CategoryList = () => {
-    const { categories } = JSON.parse(sessionStorage.getItem("user_info"));
-
-    const [list, setList] = useState(categories);
-
+const CategoryList = ({ list }) => {
     return (
         <div className="list-container">
             <ul className="list">
@@ -49,6 +44,9 @@ const CategoryList = () => {
                     return (
                         <li key={category._id} style={{ color: category.color }} className="list-item">
                             <strong>{category.name}</strong>
+                            <button className="btn-delete-channel" onClick={(e) => handleDeleteChannel(e, channel.id, channel.channel_name)}>
+                                <ImBin2 />
+                            </button>
                         </li>
                     );
                 })}

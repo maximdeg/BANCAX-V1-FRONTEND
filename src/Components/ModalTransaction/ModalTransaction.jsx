@@ -65,8 +65,6 @@ const ModalTransaction = ({ label, setIsModalOpen }) => {
             //FIXME: solve the date saving, right now mongoose is saving by default
             form_values_object.date = selectedDate ? selectedDate.toString() : new Date().toISOString().split("T")[0];
 
-            // TODO: One of this form variables saves if the remember checkbox is checked, manage to save the session
-
             const response = await POST(`${ENV.API_URL}/api/v1/transactions/${id}`, {
                 headers: getAuthenticatedHeaders(),
                 body: JSON.stringify(form_values_object),

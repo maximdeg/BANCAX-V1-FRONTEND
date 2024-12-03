@@ -20,6 +20,7 @@
     border: var(--border-line);
     border-radius: 5px;
     margin-top: 10px;
+    overflow-y: auto;
 }
 
 .window-add-list-container .window-list-container .list-container .list {
@@ -31,11 +32,27 @@
     border: var(--border-line);
     border-radius: 2%;
     background-color: var(--bg-primary-color);
-    overflow: auto;
 }
 
 .window-add-list-container .window-list-container .list-container .list .list-item {
+    display: flex;
+    height: 25px;
+    justify-content: space-between;
     border-bottom: var(--border-line);
+    transition: all 0.15s ease-in;
+}
+
+.list-item .btn-delete-channel {
+    display: none;
+    /* align-items: center; */
+    /* justify-content: center; */
+    width: 15px;
+    height: 15px;
+    margin-right: 10px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: inherit;
 }
 
 .window-add-list-container .window-list-container .list-container .list .list-item:last-child {
@@ -44,6 +61,11 @@
 
 .window-add-list-container .window-list-container .list-container .list .list-item:hover {
     background-color: var(--bg-secondary-color);
+    transform: scale(1.05);
+}
+
+.window-add-list-container .window-list-container .list-container .list .list-item:hover .btn-delete-channel {
+    display: flex;
 }
 
 .window-add-list-container .window-add-container {
