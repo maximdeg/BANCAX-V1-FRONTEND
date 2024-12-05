@@ -8,6 +8,7 @@ import "./App.css";
 const HomePage = lazy(() => import("./Pages/HomePage/HomePage.jsx"));
 const LayoutPage = lazy(() => import("./Pages/LayoutPage/LayoutPage.jsx"));
 const LoginForm = lazy(() => import("./Components/LoginForm/LoginForm.jsx"));
+const WelcomePage = lazy(() => import("./Pages/WelcomePage/WelcomePage.jsx"));
 const SettingsPage = lazy(() => import("./Pages/SettingsPage/SettingsPage.jsx"));
 const MovementsPage = lazy(() => import("./Pages/MovementsPage/MovementsPage.jsx"));
 const FormLayoutPage = lazy(() => import("./Pages/FormLayoutPage/FormLayoutPage.jsx"));
@@ -31,6 +32,7 @@ function App() {
                         <Route path="category-list" element={<CategoryListPage />} />
                     </Route>
                 </Route>
+                <Route path="/home" element={<WelcomePage />} />
                 <Route path="/in" element={<FormLayoutPage />}>
                     <Route index element={<LoginForm />} />
                     <Route path="login" element={<LoginForm />} />
