@@ -1,10 +1,12 @@
 import React, { useMemo, useState, useRef } from "react";
 import { GET } from "../fetching/http.fetching";
 import { getAuthenticatedHeaders } from "../utils/Headers";
+import { useGlobalContext } from "../Context/GlobalContext";
 import ENV from "../env";
 
 const useMovements = () => {
-    const { id } = JSON.parse(sessionStorage.getItem("user_info"));
+    const { getStorageUserInfo } = useGlobalContext();
+    const { id } = getStorageUserInfo();
     const [isLoadingMovements, setIsLoadingMovements] = useState(true);
     const [movements, setMovements] = useState([]);
     const [lastUpdated, setLastUpdated] = useState(Date.now());
@@ -38,7 +40,7 @@ const useMovements = () => {
 
     useMemo(() => updateMovements(), [lastUpdated]);
 
-    return { movements, isLoadingMovements, setLastUpdated };
+    return { movements, isLoadingMovements };
 };
 
 export default useMovements;

@@ -12,6 +12,7 @@ const SettingsPage = lazy(() => import("./Pages/SettingsPage/SettingsPage.jsx"))
 const MovementsPage = lazy(() => import("./Pages/MovementsPage/MovementsPage.jsx"));
 const FormLayoutPage = lazy(() => import("./Pages/FormLayoutPage/FormLayoutPage.jsx"));
 const EditProfilePage = lazy(() => import("./Pages/EditProfilePage/EditProfilePage.jsx"));
+const CategoryListPage = lazy(() => import("./Pages/CategoryListPage/CategoryListPage.jsx"));
 const RegistrationForm = lazy(() => import("./Components/RegistrationForm/RegistrationForm.jsx"));
 const ResetPasswordForm = lazy(() => import("./Components/ResetPasswordForm/ResetPasswordForm.jsx"));
 const ForgotPasswordForm = lazy(() => import("./Components/ForgotPasswordForm/ForgotPasswordForm.jsx"));
@@ -27,6 +28,7 @@ function App() {
                         <Route path="settings" element={<SettingsPage />} />
                         <Route path="movements" element={<MovementsPage />} />
                         <Route path="profile/:id" element={<EditProfilePage />} />
+                        <Route path="category-list" element={<CategoryListPage />} />
                     </Route>
                 </Route>
                 <Route path="/in" element={<FormLayoutPage />}>

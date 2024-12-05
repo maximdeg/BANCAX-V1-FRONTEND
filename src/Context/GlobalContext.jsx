@@ -5,7 +5,6 @@ const GlobalContext = React.createContext();
 
 const GlobalContextProvider = ({ children }) => {
     // TODO: Change all session storages for global context
-    const { movements, isLoadingMovements, setLastUpdated } = useMovements();
 
     const setStorageUserInfo = (key, value) => {
         sessionStorage.setItem(key, JSON.stringify(value));
@@ -23,9 +22,7 @@ const GlobalContextProvider = ({ children }) => {
     };
 
     return (
-        <GlobalContext.Provider
-            value={{ setLastUpdated, movements, isLoadingMovements, setStorageUserInfo, getStorageUserInfo, getSourcesAndCategoriesFromStorage }}
-        >
+        <GlobalContext.Provider value={{ setStorageUserInfo, getStorageUserInfo, getSourcesAndCategoriesFromStorage }}>
             {children}
         </GlobalContext.Provider>
     );

@@ -1,11 +1,10 @@
 import React from "react";
 import useMovements from "../../Hooks/useMovements";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
-import { useGlobalContext } from "../../Context/GlobalContext";
 import "./MovementsWindow.css";
 
 const MovementsWindow = () => {
-    const { movements, isLoadingMovements } = useGlobalContext();
+    const { movements, isLoadingMovements } = useMovements();
 
     const movementOrderedByDate = movements.sort((a, b) => new Date(b.date) - new Date(a.date));
 

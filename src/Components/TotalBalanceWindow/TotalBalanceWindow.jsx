@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useGlobalContext } from "../../Context/GlobalContext";
+import useMovements from "../../Hooks/useMovements";
 
 import "./TotalBalanceWindow.css";
 
 const TotalBalanceWindow = () => {
-    const { movements, isLoadingMovements } = useGlobalContext();
+    const { movements, isLoadingMovements } = useMovements();
 
     const [totalBalance, setTotalBalance] = useState(0);
 
