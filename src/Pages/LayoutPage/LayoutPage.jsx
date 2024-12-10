@@ -13,13 +13,12 @@ const LayoutPage = () => {
 
     return (
         <div className="layout-container">
-            {location.pathname !== "/in" && <Sidebar />}
+            <Sidebar isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
             <div className="page-container">
                 {location.pathname !== "/in" && <Header isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />}
                 <main className="main">
                     <Outlet />
                 </main>
-                {/* {location.pathname !== "/login" && <Footer />} */}
             </div>
         </div>
     );

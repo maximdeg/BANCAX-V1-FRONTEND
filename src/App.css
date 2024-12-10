@@ -7,10 +7,11 @@
 :root {
     --bg-primary-color: #1a1d1d;
     --bg-secondary-color: #171414;
+    --bg-secondary-color-transparent: #171414bc;
     --primary-shadow-color: #65b9b9;
     --secondary-shadow-color: rgba(0, 255, 55, 0.885);
     --cancel-shadow-color: rgba(248, 51, 51, 0.808);
-    --modal-shadow: 0 5px 20px 0 rgba(101, 185, 185, 0.527);
+    --modal-shadow: 0 0px 20px 0 rgba(101, 185, 185, 0.871);
 
     --text-color: #f2f2f2;
     --link-color: rgb(105, 105, 255);
@@ -58,6 +59,7 @@
 
 .link:hover {
     text-shadow: var(--hover-shadow-box);
+    text-decoration: underline;
 }
 
 .form-group input {
@@ -92,27 +94,31 @@
     display: grid;
     flex-direction: column;
     margin: 20px;
-    gap: 10px;
+    /* gap: 5px; */
     width: 100%;
     /* height: 100%; */
     color: var(--text-color);
 }
 
-.login-container h2 {
-    text-align: center;
-    margin: 10px;
+.logo-container {
+    width: 100%;
+    height: 4rem;
+    overflow: hidden;
+}
+.logo-container img {
+    width: 100%;
 }
 
-.login-container h3 {
+.login-container h2 {
     text-align: center;
-    margin: 10px;
+    padding-bottom: 10px;
 }
 
 .login-container .login-form {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    padding: 20px;
+    padding: 40px 20px 20px 20px;
     width: 100%;
     border-radius: 8px;
     border: var(--border-line);
@@ -147,6 +153,7 @@
 .link-container {
     display: flex;
     justify-content: center;
+    margin-top: 25px;
     font-size: 12px;
 }
 

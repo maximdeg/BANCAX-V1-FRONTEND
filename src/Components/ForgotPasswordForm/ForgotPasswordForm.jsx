@@ -61,10 +61,12 @@ const ForgotPasswordForm = () => {
     };
     return (
         <div className="login-container">
-            <h2> Password Reset Request</h2>
             {/* <h3>Welcome back!</h3> */}
-            <div>
-                <p>Enter your email and we will send you a link to your email to reset your password.</p>
+            <div className="logo-container">
+                <img src="/img/logo.png" alt="" />
+            </div>
+            <div className="send-email-description">
+                <p>Enter your email and a link will be sent to your email to reset your password.</p>
                 <span>
                     If you don't have an account please
                     <Link className="link link-signup" to="/in/register">
@@ -72,18 +74,19 @@ const ForgotPasswordForm = () => {
                         Sign Up
                     </Link>
                 </span>
-                {outputMessage && (
-                    <div className="email-sent">
-                        <p>{outputMessage}</p>
-                    </div>
-                )}
             </div>
             <form className="login-form" onSubmit={(e) => handleSubmitEmail(e)}>
+                <h2> Password Reset Request</h2>
                 <div className="form-group">
                     <label htmlFor="email">Email</label>
                     <input type="email" name="email" id="email" />
                 </div>
                 <div className="btn-container">
+                    {outputMessage && (
+                        <div className="email-sent">
+                            <p>{outputMessage}</p>
+                        </div>
+                    )}
                     {!isSendingEmail ? (
                         <button className="btn btn-signin">Send email</button>
                     ) : (
@@ -102,7 +105,14 @@ const ForgotPasswordForm = () => {
                 </span>
             </div>
             <div className="copyright-container">
-                <span>© Maxim Degtiarev 2024. Only for portfolio purposes.</span>
+                <span>
+                    ©{" "}
+                    <Link to="https://github.com/maximdeg" className="link">
+                        {" "}
+                        Maxim Degtiarev{" "}
+                    </Link>{" "}
+                    2024. Only for portfolio purposes.
+                </span>
             </div>
         </div>
     );

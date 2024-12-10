@@ -11,9 +11,6 @@ import ENV from "../../env";
 import { useGlobalContext } from "../../Context/GlobalContext";
 
 const ModalTransaction = ({ label, setIsModalOpen }) => {
-    // FIXME:
-    // TODO: Change all session storages for global context
-
     const today = new Date().toISOString().split("T")[0];
     const { getStorageUserInfo, getSourcesAndCategoriesFromStorage, setLastUpdated } = useGlobalContext();
 

@@ -9,7 +9,7 @@
 
 .welcome-header {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     padding: 0px 20px;
     width: 100dvw;
@@ -20,10 +20,14 @@
 
 .welcome-header .small-logo-container {
     display: flex;
+    position: absolute;
+    top: 0px;
+    left: 0px;
     align-items: center;
     width: 100px;
     height: 50px;
-    margin-left: 30px;
+    margin-left: 80px;
+    margin-top: 8px;
     background-color: transparent;
     transition: 0.9s;
     overflow: hidden;
@@ -37,7 +41,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-right: 30px;
+    margin-right: 80px;
     gap: 20px;
 }
 
@@ -82,6 +86,7 @@
 .main .home-title .main-title h1 {
     display: inline-block;
     margin-top: -25px;
+    text-shadow: 5px 5px 0px var(--bg-primary-color), 10px 10px 0px var(--primary-shadow-color), 15px 15px 0px var(--bg-secondary-color);
 }
 
 .main .home-title .main-subtitle {
@@ -128,5 +133,137 @@
     }
     100% {
         background-position: 0% 50%;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .welcome-header .buttons-container {
+        margin-right: 20px;
+    }
+
+    .welcome-header {
+        position: fixed;
+    }
+
+    .gradient-animation-background {
+        height: 100dvh;
+    }
+
+    .main .home-title {
+        flex-direction: column;
+        justify-content: space-around;
+        gap: 20px;
+    }
+
+    .main .home-title .main-title {
+        display: flex;
+        flex-direction: column;
+        margin-top: 6rem;
+        font-size: 4.5rem;
+    }
+
+    .main .home-title .main-title h1 {
+        display: inline-block;
+        margin-top: -10px;
+    }
+
+    .main .home-title .main-subtitle {
+        display: flex;
+        flex-direction: column;
+        font-size: 2rem;
+    }
+
+    .main .home-title .main-description .main-description-text {
+        font-size: 1.5rem;
+    }
+}
+
+@media screen and (max-width: 760px) {
+    .welcome-header .buttons-container {
+        display: none;
+    }
+
+    .welcome-header {
+        position: fixed;
+    }
+
+    .gradient-animation-background {
+        height: 100dvh;
+    }
+
+    .main .home-title {
+        flex-direction: column;
+    }
+
+    .main .home-title .main-title {
+        display: flex;
+        flex-direction: column;
+        margin-top: 6rem;
+    }
+
+    .main .home-title .main-title h1 {
+        display: inline-block;
+        margin-top: -10px;
+    }
+
+    .main .home-title .main-subtitle {
+        display: flex;
+        flex-direction: column;
+        font-size: 1rem;
+    }
+
+    .main .home-title .main-description .main-description-text {
+        font-size: 0.9rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .welcome-header .small-logo-container {
+        width: 100px;
+        height: 50px;
+        margin-left: 30px;
+        margin-top: 8px;
+    }
+
+    .welcome-header .buttons-container {
+        display: none;
+    }
+
+    .welcome-header {
+        position: fixed;
+    }
+
+    .gradient-animation-background {
+        height: 100dvh;
+    }
+
+    .main .home-title {
+        flex-direction: column;
+        justify-content: space-around;
+        gap: 5px;
+    }
+
+    .main .home-title .main-title {
+        display: flex;
+        flex-direction: column;
+        margin-top: 6rem;
+        font-size: 2rem;
+    }
+
+    .main .home-title .main-title h1 {
+        display: inline-block;
+        margin-top: -10px;
+    }
+
+    .main .home-title .main-subtitle {
+        display: flex;
+        flex-direction: column;
+        margin-top: 10px;
+        margin-bottom: 15px;
+        font-size: 1rem;
+    }
+
+    .main .home-title .main-description .main-description-text {
+        font-size: 0.9rem;
     }
 }

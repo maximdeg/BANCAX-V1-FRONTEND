@@ -53,3 +53,10 @@
 .total-balance-window .total-balance-details ul {
     list-style-type: none;
 }
+
+@media screen and (max-width: 760px) {
+    .total-balance-window {
+        min-width: 70dvw;
+        max-width: 90dvw;
+    }
+}

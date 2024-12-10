@@ -1,12 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import "./WelcomePage.css";
 import { Link } from "react-router-dom";
 import HamburguerMenuHome from "../../Components/HamburguerMenuHome/HamburguerMenuHome";
 
 const WelcomePage = () => {
+    const [isBurguerOpen, setIsBurguerOpen] = useState(false);
+
+    const handleBurguer = (e) => {
+        console.log(e.target);
+        setIsBurguerOpen((prevState) => {
+            return !prevState;
+        });
+    };
+
     return (
         <>
-            <Header />
+            <Header isOpen={isBurguerOpen} />
             <Main />
         </>
     );
@@ -14,7 +23,7 @@ const WelcomePage = () => {
 
 export default WelcomePage;
 
-const Header = () => {
+const Header = ({ isOpen, handleBurguer }) => {
     return (
         <header className="welcome-header">
             <div className="small-logo-container">
@@ -30,7 +39,7 @@ const Header = () => {
                     <button className="btn btn-signup">Sign up</button>
                 </Link>
             </div>
-            <HamburguerMenuHome />
+            <HamburguerMenuHome isOpen={isOpen} />
         </header>
     );
 };

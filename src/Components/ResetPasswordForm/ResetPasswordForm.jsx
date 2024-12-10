@@ -46,11 +46,13 @@ const ResetPasswordForm = () => {
 
     return (
         <div className="login-container">
-            <h2> Password Reset </h2>
-            {/* <h3>Welcome back!</h3> */}
+            <div className="logo-container">
+                <img src="/img/logo.png" alt="" />
+            </div>
             <form onSubmit={handleSubmitResetPasswordForm} className="login-form">
+                <h2> Password Reset </h2>
                 <div className="form-group">
-                    <label htmlFor="password">Password</label>
+                    <label htmlFor="password">New Password</label>
                     <input type="password" name="password" id="password" placeholder="********" />
                 </div>
                 <div className="form-group">
@@ -58,19 +60,26 @@ const ResetPasswordForm = () => {
                     <input type="password" name="password_confirm" id="password_confirm" placeholder="********" />
                 </div>
                 <div className="btn-container">
-                    <button className="btn btn-signup">Confirm</button>
+                    <button className="btn btn-signin">Confirm</button>
+                </div>
+                <div className="link-container">
+                    <span>
+                        Already have an account?{" "}
+                        <Link className="link link-signup" to={"/register"}>
+                            Log in!
+                        </Link>
+                    </span>
                 </div>
             </form>
-            <div className="link-container">
-                <span>
-                    Already have an account?{" "}
-                    <Link className="link link-signup" to={"/register"}>
-                        Log in!
-                    </Link>
-                </span>
-            </div>
             <div className="copyright-container">
-                <span>© Maxim Degtiarev 2024. Only for portfolio purposes.</span>
+                <span>
+                    ©{" "}
+                    <Link to="https://github.com/maximdeg" className="link">
+                        {" "}
+                        Maxim Degtiarev{" "}
+                    </Link>{" "}
+                    2024. Only for portfolio purposes.
+                </span>
             </div>
         </div>
     );

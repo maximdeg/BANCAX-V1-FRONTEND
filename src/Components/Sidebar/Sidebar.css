@@ -6,20 +6,27 @@
     align-items: center;
     min-width: 15dvw;
     width: 240px;
-    background-color: var(--bg-primary-color);
     height: 100dvh;
     border-right: var(--border-line);
+
+    background: rgba(101, 185, 185, 0.12);
+    background: linear-gradient(158deg, rgba(101, 185, 185, 1) 0%, rgba(75, 117, 117, 1) 0%, rgba(23, 20, 20, 1) 92%);
 }
 
 .aside-nav .sign-in-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;
-    gap: 20px;
-    width: 100%;
+    /* padding-right: 25px; */
+    width: 50%;
     height: 12dvh;
     border-bottom: var(--border-line);
+    overflow: hidden;
+}
+
+.aside-nav .sign-in-container img {
+    display: none;
+    width: 100%;
 }
 
 .aside-nav .middle-container {
@@ -89,7 +96,7 @@
 .aside-nav .middle-container .nav-menu ul li {
     display: block;
     width: 100%;
-    background-color: var(--bg-secondary-color);
+    background-color: var(--bg-secondary-color-transparent);
     padding: 5px 0px 5px 40px;
     cursor: pointer;
     transition: 0.5s;
@@ -109,4 +116,26 @@
 .aside-nav .middle-container .nav-menu ul li .link .icon {
     font-size: 17px;
     margin-bottom: 1px;
+}
+
+.btn-logout {
+    margin-top: 30px;
+    width: 65%;
+    align-self: center;
+}
+
+@media screen and (max-width: 760px) {
+    .layout-container .aside-nav {
+        display: none;
+    }
+
+    .sign-in-container .movement-buttons {
+        display: flex !important;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .aside-nav .sign-in-container img {
+        display: initial;
+    }
 }

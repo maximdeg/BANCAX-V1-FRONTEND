@@ -50,3 +50,9 @@
 .movements-list .movement-card:hover {
     background-color: var(--bg-form-color);
 }
+
+@media screen and (max-width: 760px) {
+    .movements-window {
+        max-width: 90dvw;
+    }
+}

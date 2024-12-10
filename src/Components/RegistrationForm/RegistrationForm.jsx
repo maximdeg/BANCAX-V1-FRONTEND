@@ -45,9 +45,11 @@ const RegistrationForm = () => {
     };
     return (
         <div className="login-container">
-            <h2> Sign up</h2>
-            {/* <h3>Welcome back!</h3> */}
+            <div className="logo-container">
+                <img src="/img/logo.png" alt="" />
+            </div>
             <form action="" className="registration-form" onSubmit={handleSubmitRegisterForm}>
+                <h2>Sign up</h2>
                 <div className="form-group">
                     <label htmlFor="fullname">Full name</label>
                     <input type="fullname" name="fullname" id="fullname" placeholder="John Doe" onChange={handleChangeInputValue} />
@@ -77,7 +79,14 @@ const RegistrationForm = () => {
                 </span>
             </div>
             <div className="copyright-container">
-                <span>© Maxim Degtiarev 2024. Only for portfolio purposes.</span>
+                <span>
+                    ©{" "}
+                    <Link to="https://github.com/maximdeg" className="link">
+                        {" "}
+                        Maxim Degtiarev{" "}
+                    </Link>{" "}
+                    2024. Only for portfolio purposes.
+                </span>
             </div>
         </div>
     );

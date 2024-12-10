@@ -1,16 +1,19 @@
 .header {
     display: flex;
     justify-content: space-between;
+
     align-items: center;
     padding: 0px 20px;
     width: 85dvw;
     height: 12dvh;
     border-bottom: var(--border-line);
-    background-color: var(--bg-secondary-color);
+    background: rgb(101, 185, 185);
+    background: linear-gradient(158deg, rgba(101, 185, 185, 1) 0%, rgba(75, 117, 117, 1) 0%, rgba(23, 20, 20, 1) 51%);
 }
 
 .header .movement-buttons {
     display: flex;
+    position: absolute;
     justify-content: space-between;
     margin-left: 25px;
     width: 180px;
@@ -21,11 +24,10 @@
 }
 
 .header .logo {
-    width: 90px;
+    display: block;
+    width: 250px;
     height: 90px;
     overflow: hidden;
-    margin: 10px;
-    padding: 10px;
 }
 
 .header .logo img {
@@ -49,4 +51,20 @@
 .primaryBtn:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 20px -10px rgba(24, 90, 219, 0.6);
+}
+
+@media screen and (max-width: 760px) {
+    .header {
+        width: 100dvw;
+    }
+
+    .header .movement-buttons {
+        margin-left: 100px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .header .logo {
+        display: none;
+    }
 }

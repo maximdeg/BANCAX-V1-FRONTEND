@@ -6,7 +6,7 @@ import { POST } from "../../fetching/http.fetching";
 import { getUnnauthenticatedHeaders } from "../../utils/Headers";
 import { extractFormData } from "../../utils/extractFormData";
 
-import "./LoginForm.css";
+// import "./LoginForm.css";
 import { useAuthContext } from "../../Context/AuthContext.jsx";
 const LoginForm = () => {
     const navigate = useNavigate();
@@ -51,11 +51,13 @@ const LoginForm = () => {
     };
     return (
         <div className="login-container">
-            <h2> Login</h2>
-            {/* <h3>Welcome back!</h3> */}
+            <div className="logo-container">
+                <img src="/img/logo.png" alt="" />
+            </div>
             <form action="" className="login-form" onSubmit={handleLoginForm}>
+                <h2> Login</h2>
                 <div className="form-group">
-                    <label htmlFor="email">Login</label>
+                    <label htmlFor="email">Email</label>
                     <input type="email" name="email" id="email" />
                 </div>
                 <div className="form-group">
@@ -74,17 +76,24 @@ const LoginForm = () => {
                 <div className="btn-container">
                     <button className="btn btn-signin">Sign In</button>
                 </div>
+                <div className="link-container">
+                    <span>
+                        New to Bancax?{" "}
+                        <Link className="link link-signup" to={"/in/register"}>
+                            Sign up!
+                        </Link>
+                    </span>
+                </div>
             </form>
-            <div className="link-container">
-                <span>
-                    New to Bancax?{" "}
-                    <Link className="link link-signup" to={"/in/register"}>
-                        Sign up!
-                    </Link>
-                </span>
-            </div>
             <div className="copyright-container">
-                <span>© Maxim Degtiarev 2024. Only for portfolio purposes.</span>
+                <span>
+                    ©{" "}
+                    <Link to="https://github.com/maximdeg" className="link">
+                        {" "}
+                        Maxim Degtiarev{" "}
+                    </Link>{" "}
+                    2024. Only for portfolio purposes.
+                </span>
             </div>
         </div>
     );

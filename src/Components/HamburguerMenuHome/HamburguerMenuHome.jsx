@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { slide as Menu } from "react-burger-menu";
-import "./HamburguerMenuHome.css";
 import BurguerIcon from "../BurguerIcon/BurguerIcon";
 import { Link } from "react-router-dom";
+import "./HamburguerMenuHome.css";
 
-export default function HamburguerMenuHome() {
-    const [isOpen, setIsOpen] = useState(false);
+export default function HamburguerMenuHome({ isOpen }) {
     return (
-        <Menu isOpen={isOpen} width={"200px"} right customBurgerIcon={<BurguerIcon isOpen={isOpen} />}>
+        <Menu isOpen={isOpen} width={"150px"} right customBurgerIcon={<BurguerIcon isOpen={isOpen} />}>
             <Link to="/in/login">
                 <button className="btn btn-login">Login</button>
             </Link>

@@ -20,20 +20,7 @@ const Sidebar = () => {
     return (
         <aside className="aside-nav">
             <div className="sign-in-container">
-                {isAuthenticatedUser ? (
-                    <button className="btn btn-logout" onClick={logout}>
-                        Logout
-                    </button>
-                ) : (
-                    <>
-                        <Link to="/in/login">
-                            <button className="btn btn-login">Login</button>
-                        </Link>
-                        <Link to="/in/register">
-                            <button className="btn btn-sing-up">Sign up</button>
-                        </Link>
-                    </>
-                )}
+                <img src="/img/small-logo.png" alt="" />
             </div>
             <div className="middle-container">
                 <div className="user-info">
@@ -97,6 +84,20 @@ const Sidebar = () => {
                         </li>
                     </ul>
                 </nav>
+                {isAuthenticatedUser ? (
+                    <button className="btn btn-logout" onClick={logout}>
+                        Logout
+                    </button>
+                ) : (
+                    <>
+                        <Link to="/in/login">
+                            <button className="btn btn-login">Login</button>
+                        </Link>
+                        <Link to="/in/register">
+                            <button className="btn btn-sing-up">Sign up</button>
+                        </Link>
+                    </>
+                )}
             </div>
             <div className="bottom-container"></div>
         </aside>
