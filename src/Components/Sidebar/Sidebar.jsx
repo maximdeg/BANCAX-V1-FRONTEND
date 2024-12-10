@@ -13,7 +13,7 @@ import "./Sidebar.css";
 
 const Sidebar = () => {
     const { isAuthenticatedUser, logout } = useAuthContext();
-    const { fullname, id, photo } = JSON.parse(sessionStorage.getItem("user_info"));
+    const { fullname, id, photo } = JSON.parse(localStorage.getItem("user_info"));
     const edit_profile_url = `/profile/${id}`;
     const photo_src = `/img/${photo}`;
 

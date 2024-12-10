@@ -3,7 +3,7 @@ import React from "react";
 const EditNameWindow = () => {
     const handleChangeInputValue = (e) => {};
     return (
-        <div>
+        <div className="window">
             <h3>Main Information</h3>
             <form>
                 <div className="form-group">

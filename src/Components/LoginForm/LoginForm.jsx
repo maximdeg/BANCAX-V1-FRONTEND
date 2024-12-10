@@ -40,8 +40,8 @@ const LoginForm = () => {
             const access_token = response.payload.token;
 
             // console.log(response.payload);
-            sessionStorage.setItem("access_token", access_token);
-            sessionStorage.setItem("user_info", JSON.stringify(response.payload.user));
+            localStorage.setItem("access_token", access_token);
+            localStorage.setItem("user_info", JSON.stringify(response.payload.user));
             setIsAuthenticatedUser(true);
             navigate("/");
         } catch (err) {

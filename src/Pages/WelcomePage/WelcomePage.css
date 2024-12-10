@@ -66,26 +66,28 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
+    gap: 20px;
     height: 80dvh;
-    width: 60dvw;
+    width: 70dvw;
     color: var(--text-color);
     margin-top: 20px;
+    max-width: 1470px;
 }
 
 .main .home-title .main-title {
     display: flex;
     flex-direction: column;
-    font-size: 4rem;
+    font-size: 5rem;
 }
 .main .home-title .main-title h1 {
     display: inline-block;
-    margin-top: -20px;
+    margin-top: -25px;
 }
 
 .main .home-title .main-subtitle {
     display: flex;
     flex-direction: column;
-    font-size: 2rem;
+    font-size: 1.5rem;
 }
 
 .main .home-title .main-description {
@@ -93,6 +95,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
+    max-width: fit-content;
+    /* align-self: flex-end; */
 }
 
 .main .home-title .main-description .main-description-text {

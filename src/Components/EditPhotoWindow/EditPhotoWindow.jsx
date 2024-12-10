@@ -2,7 +2,7 @@ import React from "react";
 
 const EditPhotoWindow = () => {
     return (
-        <div>
+        <div className="window">
             <h3>Photo</h3>
             <div className="user-img">
                 <img />

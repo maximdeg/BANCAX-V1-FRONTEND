@@ -6,7 +6,7 @@ const EditPasswordWindow = () => {
     const handleChangeInputValue = (e) => {};
 
     return (
-        <div>
+        <div className="window">
             <h3>Change password</h3>
             <form action="">
                 <div className="form-group">

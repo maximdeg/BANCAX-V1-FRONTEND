@@ -1,6 +1,7 @@
 import React from "react";
 import "./WelcomePage.css";
 import { Link } from "react-router-dom";
+import HamburguerMenuHome from "../../Components/HamburguerMenuHome/HamburguerMenuHome";
 
 const WelcomePage = () => {
     return (
@@ -17,7 +18,9 @@ const Header = () => {
     return (
         <header className="welcome-header">
             <div className="small-logo-container">
-                <img src="/img/small-logo.png" alt="" />
+                <Link to="/home">
+                    <img src="/img/small-logo.png" alt="" />
+                </Link>
             </div>
             <div className="buttons-container">
                 <Link to="/in/login">
@@ -27,6 +30,7 @@ const Header = () => {
                     <button className="btn btn-signup">Sign up</button>
                 </Link>
             </div>
+            <HamburguerMenuHome />
         </header>
     );
 };

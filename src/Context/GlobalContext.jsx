@@ -7,11 +7,11 @@ const GlobalContextProvider = ({ children }) => {
     // TODO: Change all session storages for global context
 
     const setStorageUserInfo = (key, value) => {
-        sessionStorage.setItem(key, JSON.stringify(value));
+        localStorage.setItem(key, JSON.stringify(value));
     };
 
     const getStorageUserInfo = () => {
-        return JSON.parse(sessionStorage.getItem("user_info"));
+        return JSON.parse(localStorage.getItem("user_info"));
     };
 
     const getSourcesAndCategoriesFromStorage = () => {

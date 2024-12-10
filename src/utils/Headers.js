@@ -11,6 +11,6 @@ export const getAuthenticatedHeaders = () => {
     const authenticatedHeaders = new Headers();
     authenticatedHeaders.set("Content-Type", "application/json");
     authenticatedHeaders.set("x-api-key", ENV.API_KEY);
-    authenticatedHeaders.set("Authorization", sessionStorage.getItem("access_token"));
+    authenticatedHeaders.set("Authorization", localStorage.getItem("access_token"));
     return authenticatedHeaders;
 };

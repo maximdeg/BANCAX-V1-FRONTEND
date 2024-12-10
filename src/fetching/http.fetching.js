@@ -45,7 +45,7 @@ export const PUT = async (URL_API, params) => {
 
 export const DELETE = async (URL_API) => {
     try {
-        const auth_header = sessionStorage.getItem("access_token");
+        const auth_header = localStorage.getItem("access_token");
 
         const response = await fetch(URL_API, {
             method: "DELETE",
