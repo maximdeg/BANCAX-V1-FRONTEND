@@ -52,7 +52,9 @@ const LoginForm = () => {
     return (
         <div className="login-container">
             <div className="logo-container">
-                <img src="/img/logo.png" alt="" />
+                <Link to="/home">
+                    <img src="/img/logo.png" alt="" />
+                </Link>
             </div>
             <form action="" className="login-form" onSubmit={handleLoginForm}>
                 <h2> Login</h2>

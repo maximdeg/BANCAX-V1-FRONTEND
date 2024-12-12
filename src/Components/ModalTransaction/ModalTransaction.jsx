@@ -12,16 +12,15 @@ import { useGlobalContext } from "../../Context/GlobalContext";
 
 const ModalTransaction = ({ label, setIsModalOpen }) => {
     const today = new Date().toISOString().split("T")[0];
-    const { getStorageUserInfo, getSourcesAndCategoriesFromStorage, setLastUpdated } = useGlobalContext();
+    const { getStorageUserInfo, getSourcesAndCategoriesFromStorage } = useGlobalContext();
 
     const { id } = getStorageUserInfo();
     const { activeSources, activeCategories } = getSourcesAndCategoriesFromStorage();
 
     const sourceOptions = activeSources.map((source) => ({ value: source.name, color: source.color, id: source._id }));
     const categoryOptions = activeCategories.map((category) => ({ value: category.name, color: category.color, id: category._id }));
+    const [outputMessages, setOutputMessages] = useState([]);
     const [selectedDate, setSelectedDate] = useState(today);
-    const formRef = useRef(null);
-
     const [selectedSourceState, setSelectedSourceState] = useState(sourceOptions[0]);
     const [selectedCategoryState, setSelectedCategoryState] = useState(categoryOptions[0]);
 
@@ -62,7 +61,6 @@ const ModalTransaction = ({ label, setIsModalOpen }) => {
             form_values_object.source = selectedSourceState;
             form_values_object.category = selectedCategoryState;
             form_values_object.amount = label === "Withdraw" ? form_values_object.amount - form_values_object.amount * 2 : form_values_object.amount;
-            //FIXME: solve the date saving, right now mongoose is saving by default
             form_values_object.date = selectedDate.toString();
 
             console.log(form_values_object);
@@ -78,16 +76,22 @@ const ModalTransaction = ({ label, setIsModalOpen }) => {
                 return;
             }
 
+            setOutputMessages((prevMessages) => [
+                ...prevMessages,
+                {
+                    message: "Transaction added successfully",
+                    amount: response.payload.detail.amount,
+                    source: response.payload.detail.source,
+                    date: response.payload.detail.date,
+                },
+            ]);
+
             console.log({ response });
         } catch (err) {
             console.error(err.message);
             // TODO: SHOW ERROR MESSAGE HERE
         }
     };
-
-    // const handleSubmit = () => {
-    //     formRef.current.submit();
-    // };
 
     return (
         <>
@@ -101,7 +105,7 @@ const ModalTransaction = ({ label, setIsModalOpen }) => {
                         <ImCross />
                     </button>
                     <div className="modalContent">
-                        <form ref={formRef} className="add-movement-form" onSubmit={(event) => handleTransactionForm(event)}>
+                        <form className="add-movement-form" onSubmit={(event) => handleTransactionForm(event)}>
                             <div className="form-group amount-container">
                                 <label htmlFor="amount">Amount</label>
                                 <input type="amount" name="amount" id="amount" onChange={handleChangeInputValue} />
@@ -118,7 +122,22 @@ const ModalTransaction = ({ label, setIsModalOpen }) => {
                                 <label htmlFor="date">Date</label>
                                 <input type="date" name="date" id="date" value={selectedDate} onChange={handleChangeDate} />
                             </div>
-                            <button type="submit" style={{ display: "none" }} />
+                            {outputMessages.length !== 0 && (
+                                <div className="output-messages-container">
+                                    <ul>
+                                        {outputMessages.map((transaction, index) => (
+                                            <li key={index}>
+                                                <div>{transaction.message}</div>
+                                                <span>
+                                                    {transaction.date}: ${transaction.amount}
+                                                    {" ---> "}
+                                                    {transaction.source}
+                                                </span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            )}
                             <div className="modalActions">
                                 <div className="actionsContainer">
                                     <button className="cancelBtn" onClick={() => setIsModalOpen(false)}>

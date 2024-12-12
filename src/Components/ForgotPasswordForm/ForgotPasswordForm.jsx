@@ -63,7 +63,9 @@ const ForgotPasswordForm = () => {
         <div className="login-container">
             {/* <h3>Welcome back!</h3> */}
             <div className="logo-container">
-                <img src="/img/logo.png" alt="" />
+                <Link to="/home">
+                    <img src="/img/logo.png" alt="" />
+                </Link>
             </div>
             <div className="send-email-description">
                 <p>Enter your email and a link will be sent to your email to reset your password.</p>

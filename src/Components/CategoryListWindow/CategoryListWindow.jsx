@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import useMovements from "../../Hooks/useMovements";
 import { useGlobalContext } from "../../Context/GlobalContext";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 import "./CategoryListWindow.css";
 
 const CategoryListWindow = () => {
@@ -53,7 +54,7 @@ const CategoryListWindow = () => {
             ...Object.keys(movementsByMonth).map((year) => ({
                 year: year,
                 months: movementsByMonth[year].map((month, index) => ({
-                    month: months[index],
+                    month: months[index].split("").slice(0, 3).join(""),
                     total_movements: movementsByMonth[year][index].length,
                     income: movementsByMonth[year][index].reduce((total, movement) => (total += movement.amount > 0 ? movement.amount : 0), 0),
                     spent: movementsByMonth[year][index].reduce((total, movement) => (total -= movement.amount < 0 ? movement.amount : 0), 0),
@@ -61,6 +62,10 @@ const CategoryListWindow = () => {
                 })),
             }))
         );
+
+        monthStatisticsArray.forEach((year) => {
+            year.months.sort().reverse();
+        });
     };
 
     const makeSourceArray = () => {
@@ -99,11 +104,13 @@ const CategoryListWindow = () => {
     return (
         <>
             {isLoadingMovements ? (
-                <p>Loading...</p>
+                <LoadingSpinner></LoadingSpinner>
             ) : (
                 <>
                     <MovementsByMonth list={monthStatisticsArray}></MovementsByMonth>
+                    <h2 style={{ marginLeft: "10px" }}> By Category</h2>
                     <CategoryList list={movementsByCategory}></CategoryList>
+                    <h2 style={{ marginLeft: "10px" }}> By Source</h2>
                     <CategoryList list={movementsBySource}></CategoryList>
                     <MovementsByYear list={yearStatisticsArray}></MovementsByYear>
                 </>
@@ -141,20 +148,20 @@ const MovementsByMonth = ({ list }) => {
                 </ul>
             </main>
 
-            {rows.map((item) => {
+            {rows.map((item, i) => {
                 return (
                     <section className="row-fadeIn-wrapper">
-                        <article className="row fadeIn nfl">
-                            <ul>
+                        <article className="row fadeIn list-item">
+                            <ul key={i}>
                                 <li>
                                     <a href="#">
                                         {item.year} / {item.month}
                                     </a>
                                 </li>
                                 <li>{item.total_movements}</li>
-                                <li>{item.income}</li>
-                                <li>{item.spent}</li>
-                                <li>{item.total_amount}</li>
+                                <li>${item.income}</li>
+                                <li>${item.spent}</li>
+                                <li>${item.total_amount}</li>
                             </ul>
                         </article>
                     </section>
@@ -166,7 +173,7 @@ const MovementsByMonth = ({ list }) => {
 
 const CategoryList = ({ list }) => {
     return (
-        <section className="wrapper">
+        <section className="wrapper-small">
             <main className="row title">
                 <ul>
                     <li>Name</li>
@@ -177,10 +184,10 @@ const CategoryList = ({ list }) => {
             {list.map((item) => {
                 return (
                     <section className="row-fadeIn-wrapper">
-                        <article className="row fadeIn nfl">
-                            <ul>
-                                <li>{item.name}</li>
-                                <li>{item.total_amount}</li>
+                        <article className="row fadeIn list-item" style={{ borderLeft: `6px solid ${item.color}` }}>
+                            <ul key={item._id}>
+                                <li style={{ textShadow: `2px 4px 5px ${item.color}` }}>{item.name}</li>
+                                <li>${item.total_amount}</li>
                             </ul>
                         </article>
                     </section>
@@ -206,15 +213,15 @@ const MovementsByYear = ({ list }) => {
             {list.map((item) => {
                 return (
                     <section className="row-fadeIn-wrapper">
-                        <article className="row fadeIn nfl">
-                            <ul>
+                        <article className="row fadeIn list-item">
+                            <ul key={item._id}>
                                 <li>
                                     <a href="#">{item.year}</a>
                                 </li>
                                 <li>{item.total_movements}</li>
-                                <li>{item.income}</li>
-                                <li>{item.spent}</li>
-                                <li>{item.total_amount}</li>
+                                <li>${item.income}</li>
+                                <li>${item.spent}</li>
+                                <li>${item.total_amount}</li>
                             </ul>
                         </article>
                     </section>

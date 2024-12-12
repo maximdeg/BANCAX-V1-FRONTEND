@@ -1,0 +1,238 @@
+:root {
+    --color-one: rgba(101, 185, 185, 1);
+    --color-two: rgba(75, 117, 117, 1);
+    --color-three: rgb(70, 255, 255);
+    --color-four: rgba(101, 185, 185, 0.12);
+    --color-five: rgb(0, 255, 179);
+}
+
+.error-container {
+    text-align: center;
+    font-size: 180px;
+    font-weight: 800;
+    padding: 5rem 15px;
+    width: 100dvw;
+    height: 100dvh;
+    background: rgba(101, 185, 185, 0.12);
+    background: linear-gradient(158deg, rgba(101, 185, 185, 1) 0%, rgba(75, 117, 117, 1) 0%, rgba(23, 20, 20, 1) 92%);
+}
+
+.error-container > span {
+    display: inline-block;
+    line-height: 0.7;
+    position: relative;
+    color: #ffb485;
+}
+.error-container > span {
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+}
+.error-container > span:nth-of-type(1) {
+    color: var(--color-one);
+    animation: colordancing 4s infinite;
+}
+.error-container > span:nth-of-type(3) {
+    color: var(--color-two);
+    animation: colordancing2 4s infinite;
+}
+.error-container > span:nth-of-type(2) {
+    width: 120px;
+    height: 120px;
+    border-radius: 999px;
+}
+.error-container > span:nth-of-type(2):before,
+.error-container > span:nth-of-type(2):after {
+    border-radius: 0%;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: inherit;
+    height: inherit;
+    border-radius: 999px;
+    box-shadow: inset 30px 0 0 var(--color-four), inset 0 30px 0 var(--color-three), inset -30px 0 0 var(--color-five),
+        inset 0 -30px 0 var(--color-three);
+    animation: shadowsdancing 4s infinite;
+}
+.error-container > span:nth-of-type(2):before {
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.screen-reader-text {
+    position: absolute;
+    top: -9999em;
+    left: -9999em;
+}
+@keyframes shadowsdancing {
+    0% {
+        box-shadow: inset 30px 0 0 var(--color-five), inset 0 30px 0 var(--color-one), inset -30px 0 0 var(--color-three),
+            inset 0 -30px 0 var(--color-two);
+    }
+    25% {
+        box-shadow: inset 30px 0 0 var(--color-two), inset 0 30px 0 var(--color-five), inset -30px 0 0 var(--color-one),
+            inset 0 -30px 0 var(--color-three);
+    }
+    50% {
+        box-shadow: inset 30px 0 0 var(--color-three), inset 0 30px 0 var(--color-two), inset -30px 0 0 var(--color-five),
+            inset 0 -30px 0 var(--color-one);
+    }
+    75% {
+        box-shadow: inset 30px 0 0 var(--color-one), inset 0 30px 0 var(--color-three), inset -30px 0 0 var(--color-two),
+            inset 0 -30px 0 var(--color-five);
+    }
+    100% {
+        box-shadow: inset 30px 0 0 var(--color-five), inset 0 30px 0 var(--color-one), inset -30px 0 0 var(--color-three),
+            inset 0 -30px 0 var(--color-two);
+    }
+}
+@keyframes colordancing {
+    0% {
+        color: var(--color-five);
+    }
+    25% {
+        color: var(--color-three);
+    }
+    50% {
+        color: var(--color-one);
+    }
+    75% {
+        color: var(--color-two);
+    }
+    100% {
+        color: var(--color-five);
+    }
+}
+@keyframes colordancing2 {
+    0% {
+        color: var(--color-one);
+    }
+    25% {
+        color: var(--color-two);
+    }
+    50% {
+        color: var(--color-five);
+    }
+    75% {
+        color: var(--color-three);
+    }
+    100% {
+        color: var(--color-one);
+    }
+}
+
+.btn-error-container {
+    text-align: center;
+}
+
+.error_section_subtitle {
+    color: var(--text-color);
+    text-transform: uppercase;
+    letter-spacing: 5pt;
+    font-weight: 500;
+    font-size: 0.8rem;
+    margin-bottom: -5em;
+}
+
+@media only screen and (max-width: 600px) {
+    .error-container > span:nth-of-type(2) {
+        width: 80px;
+        height: 80px;
+    }
+
+    .error-container {
+        font-size: 120px;
+    }
+}
+
+/* ERROR PAGE N1 */
+/* :root {
+    --primary-color: #32c983;
+    --secondary-color: #25f193;
+    --black: #343434;
+    --dark-black: #1a1a1a;
+    --gradient: linear-gradient(to top, var(--primary-color), var(--secondary-color));
+    --black-gradient: linear-gradient(-225deg, --dark-black, black);
+} */
+
+/* a {
+    text-decoration: none;
+}
+body {
+    font-family: "Source Sans Pro", sans-serif;
+    font-weight: 600;
+    color: --black;
+} */
+/* .error_section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    background-image: --black-gradient;
+}
+.error_section_subtitle {
+    color: --secondary-color;
+    text-transform: uppercase;
+    letter-spacing: 5pt;
+    font-weight: 500;
+    font-size: 0.8rem;
+    margin-bottom: -5em;
+}
+.error_title {
+    --x-shadow: 0;
+    --y-shadow: 0;
+    --x: 50%;
+    --y: 50%;
+    font-size: 15rem;
+    transition: all 0.2s ease;
+    position: relative;
+    padding: 2rem;
+}
+
+.error_title:hover {
+    transition: all 0.2s ease;
+    text-shadow: var(--x-shadow) var(--y-shadow) 10px --dark-black;
+}
+
+.error_title p {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    background-image: radial-gradient(circle closest-side, rgba(white, 0.05), transparent);
+    background-position: var(--x) var(--y);
+    background-repeat: no-repeat;
+    text-shadow: none;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: all 0.1s ease;
+}
+
+.error_section_button {
+    padding: 0.8em 1.5em;
+    border-radius: 99999px;
+    background-image: --gradient;
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.2), inset 0px -2px 5px 0px rgba(0, 0, 0, 0.2);
+    border: none;
+
+    cursor: pointer;
+
+    text-shadow: 0px 1px --black;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1.5pt;
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+
+    transition: ease-out 0.2s all;
+}
+
+.error_section_button:hover {
+    text-shadow: 0px 1px 1px --black;
+    transform: translateY(-5px);
+    box-shadow: 0px 4px 15px 2px rgba(0, 0, 0, 0.1), inset 0px -3px 7px 0px rgba(0, 0, 0, 0.2);
+    transition: ease-out 0.2s all;
+} */

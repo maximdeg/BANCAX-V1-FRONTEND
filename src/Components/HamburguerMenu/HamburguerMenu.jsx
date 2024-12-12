@@ -6,7 +6,7 @@ import "./HamburguerMenu.css";
 
 export default function HamburguerMenu({ isOpen }) {
     return (
-        <Menu isOpen={isOpen} width={"280px"} left customBurgerIcon={<BurguerIcon isOpen={isOpen} />}>
+        <Menu isOpen={isOpen} width={"250px"} left customBurgerIcon={<BurguerIcon isOpen={isOpen} />}>
             <Sidebar />
         </Menu>
     );

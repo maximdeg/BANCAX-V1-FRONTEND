@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     width: 50%;
+    z-index: 3;
 }
 
 .select-container .select-label {
@@ -10,6 +11,8 @@
     border: var(--border-line);
     border-radius: 5px;
     transition: all 0.15s ease-in;
+    z-index: 1;
+    cursor: pointer;
 }
 
 .select-container .select-label:hover {
@@ -19,6 +22,16 @@
 
 .select-container .select-label::after .select-list {
     position: absolute;
+}
+
+.select-container::after {
+    content: "▼";
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 10px;
+    margin-top: -25px;
+    color: var(--text-color);
+    z-index: 0;
 }
 
 .select-list {
@@ -34,20 +47,20 @@
     font-size: 1rem;
     font-weight: 400;
     z-index: 0;
-    width: 70%;
+    width: 50%;
     background-color: var(--bg-secondary-color);
 }
 
 .select-list .option {
     display: block;
+    width: 100%;
     margin: 0;
     text-indent: 15px;
     transition: all 0.15s ease-in;
     cursor: pointer;
-    /* border-top: var(--border-line); */
 }
 
 .select-list .option:hover {
-    background-color: rgba(171, 171, 171, 0.433);
+    background-color: rgba(171, 171, 171, 0.168);
     color: var(--text-color);
 }

@@ -6,6 +6,7 @@ import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute.jsx";
 import "./App.css";
 
 const HomePage = lazy(() => import("./Pages/HomePage/HomePage.jsx"));
+const ErrorPage = lazy(() => import("./Pages/ErrorPage/ErrorPage.jsx"));
 const LayoutPage = lazy(() => import("./Pages/LayoutPage/LayoutPage.jsx"));
 const LoginForm = lazy(() => import("./Components/LoginForm/LoginForm.jsx"));
 const WelcomePage = lazy(() => import("./Pages/WelcomePage/WelcomePage.jsx"));
@@ -41,7 +42,7 @@ function App() {
                     <Route path="reset-password/:token" element={<ResetPasswordForm />} />
                     <Route path="verify/:verification_token" element={<VerificationConfirmationPage />} />
                 </Route>
-                <Route path="*" element={<h1>404</h1>} />
+                <Route path="*" element={<ErrorPage />} />
             </Routes>
         </Suspense>
     );

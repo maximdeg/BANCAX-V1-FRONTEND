@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef } from "react";
+import React, { useState, useCallback } from "react";
 
 import "./CustomSelect.css";
 
@@ -21,20 +21,20 @@ const ClickableListItem = withClickHandler("li");
 const CustomSelect = ({ label, options, handleChange }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [labelState, setLabelState] = useState(label);
+    const [labelColor, setLabelColor] = useState("#FFFFFF");
     const handleToggle = () => setIsOpen(!isOpen);
     // const selectedOption = options.find((option) => option.value === value);
 
-    const dropdownRef = useRef(null);
-
-    const handleOptionClick = (e) => {
+    const handleOptionClick = (e, color) => {
         setLabelState(e.target.textContent);
         handleChange(e.target.textContent);
+        setLabelColor(color);
         setIsOpen(!isOpen);
     };
 
     return (
         <div className="select-container">
-            <div onClick={handleToggle} className="select-label">
+            <div onClick={handleToggle} className="select-label" style={{ borderLeft: `6px solid ${labelColor}` }}>
                 {labelState}
             </div>
             <ul className="select-list" type="category" name="category" id="category">
@@ -43,9 +43,9 @@ const CustomSelect = ({ label, options, handleChange }) => {
                         <ClickableListItem
                             key={option.id}
                             className="option"
-                            style={{ color: option.color }}
+                            style={{ color: option.color, borderLeft: `3px solid ${option.color}` }}
                             value={option.value}
-                            onClick={(e) => handleOptionClick(e)}
+                            onClick={(e) => handleOptionClick(e, option.color)}
                         >
                             {option.value}
                         </ClickableListItem>

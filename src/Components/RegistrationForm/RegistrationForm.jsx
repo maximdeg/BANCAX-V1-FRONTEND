@@ -46,7 +46,9 @@ const RegistrationForm = () => {
     return (
         <div className="login-container">
             <div className="logo-container">
-                <img src="/img/logo.png" alt="" />
+                <Link to="/home">
+                    <img src="/img/logo.png" alt="" />
+                </Link>
             </div>
             <form action="" className="registration-form" onSubmit={handleSubmitRegisterForm}>
                 <h2>Sign up</h2>

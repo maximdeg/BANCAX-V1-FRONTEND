@@ -19,9 +19,6 @@ const Sidebar = () => {
 
     return (
         <aside className="aside-nav">
-            <div className="sign-in-container">
-                <img src="/img/small-logo.png" alt="" />
-            </div>
             <div className="middle-container">
                 <div className="user-info">
                     <div className="user-img">

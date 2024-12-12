@@ -47,7 +47,9 @@ const ResetPasswordForm = () => {
     return (
         <div className="login-container">
             <div className="logo-container">
-                <img src="/img/logo.png" alt="" />
+                <Link to="/home">
+                    <img src="/img/logo.png" alt="" />
+                </Link>
             </div>
             <form onSubmit={handleSubmitResetPasswordForm} className="login-form">
                 <h2> Password Reset </h2>
