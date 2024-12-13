@@ -26,7 +26,7 @@ const Header = ({ isModalOpen, setIsModalOpen }) => {
             </div>
             <div className="logo">
                 <Link to="/home">
-                    <img src="/img/logo.png" alt="" />
+                    <img src="https://res.cloudinary.com/djdnlogf1/image/upload/v1734110512/logo_njrhjq.png" alt="" />
                 </Link>
             </div>
         </header>

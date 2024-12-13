@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import ENV from "../../env";
 import { getUnnauthenticatedHeaders } from "../../utils/Headers";
 import { GET } from "../../fetching/http.fetching";
@@ -23,7 +23,21 @@ const VerificationConfirmation = () => {
         verify();
     }, []);
 
-    return <div>VERIFICATION CONFIRMATION PAGE</div>;
+    return (
+        <section className="verify-section">
+            <p className="verify_section_subtitle">Welcome to</p>
+            <div className="verify-container">
+                <span>B</span>
+                <span>N</span>
+                <span>X</span>
+            </div>
+            <div className="btn-verify-container">
+                <Link to="/in/login">
+                    <button className="btn">Come back to Log In</button>
+                </Link>
+            </div>
+        </section>
+    );
 };
 
 export default VerificationConfirmation;

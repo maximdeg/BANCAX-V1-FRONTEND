@@ -53,7 +53,7 @@ const LoginForm = () => {
         <div className="login-container">
             <div className="logo-container">
                 <Link to="/home">
-                    <img src="/img/logo.png" alt="" />
+                    <img src="https://res.cloudinary.com/djdnlogf1/image/upload/v1734110512/logo_njrhjq.png" alt="" />
                 </Link>
             </div>
             <form action="" className="login-form" onSubmit={handleLoginForm}>

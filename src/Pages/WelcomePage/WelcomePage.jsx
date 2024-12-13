@@ -28,7 +28,7 @@ const Header = ({ isOpen, handleBurguer }) => {
         <header className="welcome-header">
             <div className="small-logo-container">
                 <Link to="/home">
-                    <img src="/img/small-logo.png" alt="" />
+                    <img src="https://res.cloudinary.com/djdnlogf1/image/upload/v1734110512/small-logo_f0jlfh.png" alt="" />
                 </Link>
             </div>
             <div className="buttons-container">

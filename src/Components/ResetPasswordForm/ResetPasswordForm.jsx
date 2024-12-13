@@ -48,7 +48,7 @@ const ResetPasswordForm = () => {
         <div className="login-container">
             <div className="logo-container">
                 <Link to="/home">
-                    <img src="/img/logo.png" alt="" />
+                    <img src="https://res.cloudinary.com/djdnlogf1/image/upload/v1734110512/logo_njrhjq.png" alt="" />
                 </Link>
             </div>
             <form onSubmit={handleSubmitResetPasswordForm} className="login-form">

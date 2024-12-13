@@ -1,0 +1,157 @@
+:root {
+    --color-one: rgba(101, 185, 185, 1);
+    --color-two: rgba(75, 117, 117, 1);
+    --color-three: rgb(70, 255, 255);
+    --color-four: rgba(101, 185, 185, 0.12);
+    --color-five: rgb(0, 255, 179);
+}
+
+.verify-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100dvw;
+    height: 100%;
+    padding-top: 50px;
+    background: rgba(101, 185, 185, 0.12);
+    background: linear-gradient(158deg, rgba(101, 185, 185, 1) 0%, rgba(75, 117, 117, 1) 0%, rgba(23, 20, 20, 1) 92%);
+}
+
+.verify-container {
+    text-align: center;
+    font-size: 90px;
+    font-weight: 800;
+    padding: 5rem 15px;
+}
+
+.verify-container > span {
+    display: inline-block;
+    line-height: 0.7;
+    position: relative;
+    color: #ffb485;
+}
+.verify-container > span {
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+}
+.verify-container > span:nth-of-type(1) {
+    color: var(--color-one);
+    animation: colordancing 4s infinite;
+}
+.verify-container > span:nth-of-type(3) {
+    color: var(--color-two);
+    animation: colordancing2 4s infinite;
+}
+.verify-container > span:nth-of-type(2) {
+    color: var(--color-five);
+    animation: colordancing2 4s infinite;
+}
+.verify-container > span:nth-of-type(2):before,
+/* .verify-container > span:nth-of-type(2):after {
+    border-radius: 0%;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: inherit;
+    height: inherit;
+    border-radius: 999px;
+    box-shadow: inset 30px 0 0 var(--color-four), inset 0 30px 0 var(--color-three), inset -30px 0 0 var(--color-five),
+        inset 0 -30px 0 var(--color-three);
+    animation: shadowsdancing 4s infinite;
+} */
+.verify-container > span:nth-of-type(2):before {
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.screen-reader-text {
+    position: absolute;
+    top: -9999em;
+    left: -9999em;
+}
+@keyframes shadowsdancing {
+    0% {
+        box-shadow: inset 30px 0 0 var(--color-five), inset 0 30px 0 var(--color-one), inset -30px 0 0 var(--color-three),
+            inset 0 -30px 0 var(--color-two);
+    }
+    25% {
+        box-shadow: inset 30px 0 0 var(--color-two), inset 0 30px 0 var(--color-five), inset -30px 0 0 var(--color-one),
+            inset 0 -30px 0 var(--color-three);
+    }
+    50% {
+        box-shadow: inset 30px 0 0 var(--color-three), inset 0 30px 0 var(--color-two), inset -30px 0 0 var(--color-five),
+            inset 0 -30px 0 var(--color-one);
+    }
+    75% {
+        box-shadow: inset 30px 0 0 var(--color-one), inset 0 30px 0 var(--color-three), inset -30px 0 0 var(--color-two),
+            inset 0 -30px 0 var(--color-five);
+    }
+    100% {
+        box-shadow: inset 30px 0 0 var(--color-five), inset 0 30px 0 var(--color-one), inset -30px 0 0 var(--color-three),
+            inset 0 -30px 0 var(--color-two);
+    }
+}
+@keyframes colordancing {
+    0% {
+        color: var(--color-five);
+    }
+    25% {
+        color: var(--color-three);
+    }
+    50% {
+        color: var(--color-one);
+    }
+    75% {
+        color: var(--color-two);
+    }
+    100% {
+        color: var(--color-five);
+    }
+}
+@keyframes colordancing2 {
+    0% {
+        color: var(--color-one);
+    }
+    25% {
+        color: var(--color-two);
+    }
+    50% {
+        color: var(--color-five);
+    }
+    75% {
+        color: var(--color-three);
+    }
+    100% {
+        color: var(--color-one);
+    }
+}
+
+.btn-verify-container {
+    text-align: center;
+}
+
+.verify_section_subtitle {
+    color: var(--text-color);
+    text-transform: uppercase;
+    letter-spacing: 5pt;
+    font-weight: 500;
+    font-size: 0.8rem;
+    margin-bottom: -5em;
+}
+
+@media only screen and (max-width: 600px) {
+    /* .verify-container > span:nth-of-type(2) {
+        width: 80px;
+        height: 80px;
+    } */
+
+    .verify-container {
+        text-align: center;
+        font-size: 90px;
+        font-weight: 800;
+        padding: 5rem 15px;
+    }
+}

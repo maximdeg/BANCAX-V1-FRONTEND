@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import ENV from "../../env.js";
-import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "../../Hooks/useForm";
-import { extractFormData } from "../../utils/extractFormData";
 import { POST } from "../../fetching/http.fetching";
+import { Link, useNavigate } from "react-router-dom";
+import { validateFields } from "../../utils/validateFields";
+import { extractFormData } from "../../utils/extractFormData";
 import { getUnnauthenticatedHeaders } from "../../utils/Headers";
 
 import "./RegistrationForm.css";
 
 const RegistrationForm = () => {
     const navigate = useNavigate();
+    const [outputMessages, setOutputMessages] = useState([]);
     const form_fields = {
         fullname: "",
         email: "",
@@ -26,50 +28,70 @@ const RegistrationForm = () => {
             const form_values = new FormData(form_HTML);
             const form_values_object = extractFormData(form_fields, form_values);
 
+            const errors = validateFields(form_values_object);
+
+            if (errors.length > 0) {
+                setOutputMessages(errors);
+                console.log("SIGN UP FORM", errors);
+                return;
+            }
+
+            if (form_values_object.password !== form_values_object.password_confirm) {
+                setOutputMessages((prevMessages) => [...prevMessages, { message: "Passwords do not match" }]);
+                return;
+            }
+
             const response = await POST(`${ENV.API_URL}/api/v1/auth/signup`, {
                 headers: getUnnauthenticatedHeaders(),
                 body: JSON.stringify(form_values_object),
             });
 
-            console.log(response);
-
             if (!response.ok) {
-                // TODO: SHOW ERROR MESSAGE
-                // Use set error
+                setOutputMessages((prevMessages) => [...prevMessages, { message: response.payload.message }]);
+                return;
             }
 
-            navigate("/in/login");
+            setTimeout(() => {
+                navigate("/in/login");
+            }, 5000);
         } catch (err) {
+            setOutputMessages((prevMessages) => [...prevMessages, { message: err.message }]);
             console.error(err.message);
         }
     };
+
     return (
         <div className="login-container">
             <div className="logo-container">
                 <Link to="/home">
-                    <img src="/img/logo.png" alt="" />
+                    <img src="https://res.cloudinary.com/djdnlogf1/image/upload/v1734110512/logo_njrhjq.png" alt="" />
                 </Link>
             </div>
             <form action="" className="registration-form" onSubmit={handleSubmitRegisterForm}>
                 <h2>Sign up</h2>
                 <div className="form-group">
-                    <label htmlFor="fullname">Full name</label>
+                    <label htmlFor="fullname">Full name*</label>
                     <input type="fullname" name="fullname" id="fullname" placeholder="John Doe" onChange={handleChangeInputValue} />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="email">Email</label>
+                    <label htmlFor="email">Email*</label>
                     <input type="email" name="email" id="email" placeholder="example@email.com" onChange={handleChangeInputValue} />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="password">Password</label>
+                    <label htmlFor="password">Password*</label>
                     <input type="password" name="password" id="password" placeholder="********" onChange={handleChangeInputValue} />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="password_confirm">Confirm Password</label>
+                    <label htmlFor="password_confirm">Confirm Password*</label>
                     <input type="password" name="password_confirm" id="password_confirm" placeholder="********" onChange={handleChangeInputValue} />
                 </div>
                 <div className="btn-container">
-                    <button className="btn btn-signup">Sign Up</button>
+                    <button className="btn btn-signup">Send verification email</button>
+                </div>
+                <div className="output-messages-container">
+                    {outputMessages.map((message) => {
+                        return <div className="output-message">{message.message}</div>;
+                    })}
                 </div>
             </form>
             <div className="link-container">
