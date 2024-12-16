@@ -172,6 +172,22 @@
     font-size: 8px;
 }
 
+/* ERROR CONTAINER OUTPUT MESSAGES */
+
+.output-messages-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    padding: 10px 10px 10px 10px;
+    width: 100%;
+    border-radius: 8px;
+    border: var(--border-line);
+    background-color: var(--bg-form-color);
+    text-align: center;
+    font-size: 10px;
+    color: var(--cancel-shadow-color);
+}
+
 /* LOADING SPINNER */
 
 .loading-page {

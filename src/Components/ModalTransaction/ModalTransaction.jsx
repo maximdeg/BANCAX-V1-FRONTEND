@@ -1,14 +1,15 @@
 import React, { useState, useRef } from "react";
-import CustomSelect from "../CustomSelect/CustomSelect";
+import ENV from "../../env";
 import { ImCross } from "react-icons/im";
-
-import "./ModalTransaction.css";
-import { getAuthenticatedHeaders } from "../../utils/Headers";
-import { extractFormData } from "../../utils/extractFormData";
 import { useForm } from "../../Hooks/useForm";
 import { POST } from "../../fetching/http.fetching";
-import ENV from "../../env";
+import CustomSelect from "../CustomSelect/CustomSelect";
+import { validateFields } from "../../utils/validateFields";
+import { extractFormData } from "../../utils/extractFormData";
+import { getAuthenticatedHeaders } from "../../utils/Headers";
 import { useGlobalContext } from "../../Context/GlobalContext";
+
+import "./ModalTransaction.css";
 
 const ModalTransaction = ({ label, setIsModalOpen }) => {
     const today = new Date().toISOString().split("T")[0];
@@ -20,6 +21,7 @@ const ModalTransaction = ({ label, setIsModalOpen }) => {
     const sourceOptions = activeSources.map((source) => ({ value: source.name, color: source.color, id: source._id }));
     const categoryOptions = activeCategories.map((category) => ({ value: category.name, color: category.color, id: category._id }));
     const [outputMessages, setOutputMessages] = useState([]);
+    const [outputErrors, setOutputErrors] = useState([]);
     const [selectedDate, setSelectedDate] = useState(today);
     const [selectedSourceState, setSelectedSourceState] = useState(sourceOptions[0]);
     const [selectedCategoryState, setSelectedCategoryState] = useState(categoryOptions[0]);
@@ -63,7 +65,13 @@ const ModalTransaction = ({ label, setIsModalOpen }) => {
             form_values_object.amount = label === "Withdraw" ? form_values_object.amount - form_values_object.amount * 2 : form_values_object.amount;
             form_values_object.date = selectedDate.toString();
 
-            console.log(form_values_object);
+            const errors = validateFields(form_values_object);
+            console.log(errors);
+
+            if (errors.length > 0) {
+                setOutputErrors(errors);
+                return;
+            }
 
             const response = await POST(`${ENV.API_URL}/api/v1/transactions/${id}`, {
                 headers: getAuthenticatedHeaders(),
@@ -71,11 +79,11 @@ const ModalTransaction = ({ label, setIsModalOpen }) => {
             });
 
             if (!response.ok) {
-                // TODO: SHOW ERROR MESSAGE HERE
-                console.error(response.payload.detail);
+                setOutputErrors(() => [{ message: response.payload.detail }]);
                 return;
             }
 
+            setOutputErrors(() => []);
             setOutputMessages((prevMessages) => [
                 ...prevMessages,
                 {
@@ -83,13 +91,12 @@ const ModalTransaction = ({ label, setIsModalOpen }) => {
                     amount: response.payload.detail.amount,
                     source: response.payload.detail.source,
                     date: response.payload.detail.date,
+                    border: `3px solid ${sourceOptions.find((source) => source.value === response.payload.detail.source).color}`,
                 },
             ]);
-
-            console.log({ response });
         } catch (err) {
+            setOutputErrors(() => [{ message: err.message }]);
             console.error(err.message);
-            // TODO: SHOW ERROR MESSAGE HERE
         }
     };
 
@@ -122,16 +129,29 @@ const ModalTransaction = ({ label, setIsModalOpen }) => {
                                 <label htmlFor="date">Date</label>
                                 <input type="date" name="date" id="date" value={selectedDate} onChange={handleChangeDate} />
                             </div>
-                            {outputMessages.length !== 0 && (
+                            {outputErrors.length !== 0 && (
                                 <div className="output-messages-container">
+                                    {outputErrors.map((message, index) => {
+                                        return (
+                                            <div className="output-message" key={index} style={{ color: message.color || "red" }}>
+                                                <span>{message.message}</span>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            )}
+                            {outputMessages.length !== 0 && (
+                                <div className="succesful-transaction-container">
                                     <ul>
                                         {outputMessages.map((transaction, index) => (
-                                            <li key={index}>
-                                                <div>{transaction.message}</div>
-                                                <span>
-                                                    {transaction.date}: ${transaction.amount}
+                                            <li key={index} style={{ borderLeft: transaction.border || "none" }}>
+                                                <div>
+                                                    <span style={{ marginLeft: "8px" }}>{transaction.message}</span>
+                                                </div>
+                                                <span style={{ marginLeft: "8px" }}>
+                                                    $ {transaction.amount}
                                                     {" ---> "}
-                                                    {transaction.source}
+                                                    {transaction.source} {" on "} {new Date(transaction.date).toLocaleDateString("es-AR")}
                                                 </span>
                                             </li>
                                         ))}

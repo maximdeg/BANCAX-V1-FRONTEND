@@ -47,15 +47,13 @@ const RegistrationForm = () => {
             });
 
             if (!response.ok) {
-                setOutputMessages((prevMessages) => [...prevMessages, { message: response.payload.message }]);
+                setOutputMessages((prevMessages) => [{ message: response.payload.message }]);
                 return;
             }
 
-            setTimeout(() => {
-                navigate("/in/login");
-            }, 5000);
+            setOutputMessages((prevMessages) => [{ color: "green", message: "Please open the verification link sent to your email." }]);
         } catch (err) {
-            setOutputMessages((prevMessages) => [...prevMessages, { message: err.message }]);
+            setOutputMessages((prevMessages) => [{ message: err.message }]);
             console.error(err.message);
         }
     };
@@ -88,11 +86,18 @@ const RegistrationForm = () => {
                 <div className="btn-container">
                     <button className="btn btn-signup">Send verification email</button>
                 </div>
-                <div className="output-messages-container">
-                    {outputMessages.map((message) => {
-                        return <div className="output-message">{message.message}</div>;
-                    })}
-                </div>
+
+                {outputMessages.length !== 0 && (
+                    <div className="output-messages-container">
+                        {outputMessages.map((message, index) => {
+                            return (
+                                <div className="output-message" key={index} style={{ color: message.color || "red" }}>
+                                    {message.message}
+                                </div>
+                            );
+                        })}
+                    </div>
+                )}
             </form>
             <div className="link-container">
                 <span>

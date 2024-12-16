@@ -17,8 +17,8 @@
 }
 .lds-ellipsis div {
     position: absolute;
-    top: 9px;
-    width: 10px;
+    top: 10px;
+    width: 9px;
     height: 10px;
     border-radius: 50%;
     background: currentColor;

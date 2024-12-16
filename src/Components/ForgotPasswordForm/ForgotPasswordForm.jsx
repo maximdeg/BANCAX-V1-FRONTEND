@@ -5,41 +5,46 @@ import { Link } from "react-router-dom";
 import { PUT } from "../../fetching/http.fetching";
 import { getUnnauthenticatedHeaders } from "../../utils/Headers";
 import "./ForgotPasswordForm.css";
+import { validateFields } from "../../utils/validateFields.js";
 
 const ForgotPasswordForm = () => {
-    const [outputMessage, setOutputMessage] = useState("");
+    const [outputMessages, setOutputMessages] = useState([]);
     const [emailAmount, setEmailAmount] = useState(0);
     const [isSendingEmail, setIsSendingEmail] = useState(false);
 
     const setOutputState = (message) => {
-        setOutputMessage(message);
-        setIsSendingEmail(() => {
-            return false;
-        });
+        setOutputMessages(() => message);
+        setIsSendingEmail(() => false);
     };
 
     const handleSubmitEmail = async (e) => {
         try {
             e.preventDefault();
 
-            setIsSendingEmail(() => {
-                return true;
-            });
+            setIsSendingEmail(() => true);
 
             const email = e.target.email.value;
-
-            console.log("FRONTEND:", email);
+            const errors = validateFields({ email });
 
             if (!email) {
-                return setOutputState("Please enter your email.");
+                return setOutputState([{ message: "Please enter an email address" }]);
+            }
+            if (errors.length > 0) {
+                setOutputState(errors);
+                return;
             }
 
             if (emailAmount !== 0) {
-                return setOutputState(
-                    "We have already sent an email to this address: " +
-                        email +
-                        ". Please wait 1 hour before requesting another recovery password email."
-                );
+                setOutputState([
+                    {
+                        color: "white",
+                        message:
+                            "We have already sent an email to this address: " +
+                            email +
+                            ". Please wait 1 hour before requesting another recovery password email.",
+                    },
+                ]);
+                return;
             }
 
             const response = await PUT(`${ENV.API_URL}/api/v1/auth/forgot-password`, {
@@ -47,16 +52,19 @@ const ForgotPasswordForm = () => {
                 body: JSON.stringify({ email }),
             });
 
-            if (response.ok) {
-                setOutputState("Email sent successfully to " + email + ". Please also check your spam folder.");
-                return setEmailAmount((currentAmount) => {
-                    return currentAmount + 1;
-                });
-            } else {
-                setOutputState("The email is not correct. Please try again or sign up with us.");
+            if (!response.ok) {
+                setOutputState([{ message: response.payload.detail }]);
+                return;
             }
+
+            setOutputState([{ color: "white", message: "Email sent successfully to " + email + ". Please also check your spam folder." }]);
+
+            setEmailAmount((currentAmount) => {
+                return currentAmount + 1;
+            });
         } catch (err) {
-            console.log(err);
+            setOutputState([{ message: err.message }]);
+            console.dir(err);
         }
     };
     return (
@@ -84,16 +92,22 @@ const ForgotPasswordForm = () => {
                     <input type="email" name="email" id="email" />
                 </div>
                 <div className="btn-container">
-                    {outputMessage && (
-                        <div className="email-sent">
-                            <p>{outputMessage}</p>
-                        </div>
-                    )}
                     {!isSendingEmail ? (
                         <button className="btn btn-signin">Send email</button>
                     ) : (
                         <div className="btn btn-loading">
                             <LoadingDots />
+                        </div>
+                    )}
+                    {outputMessages.length !== 0 && (
+                        <div className="output-messages-container">
+                            {outputMessages.map((message, index) => {
+                                return (
+                                    <div className="output-message" key={index} style={{ color: message.color || "red" }}>
+                                        {message.message}
+                                    </div>
+                                );
+                            })}
                         </div>
                     )}
                 </div>

@@ -15,12 +15,24 @@ const validateString = (value) => {
 };
 
 const emptyField = (value) => {
-    return value;
+    return Boolean(value);
+};
+
+const validatePositiveAmount = (value) => {
+    return value > 0;
+};
+
+const validateDate = (value) => {
+    return !isNaN(Date.parse(value));
+};
+
+const validateNumber = (value) => {
+    return !isNaN(value);
 };
 
 export const ERRORS = {
     FULLNAME_LENGTH: {
-        message: "*Please enter a valid fullname.",
+        message: "*Please enter a valid first name and last name.",
         id: 1,
         property: "fullname",
         validate: validateName,
@@ -46,7 +58,49 @@ export const ERRORS = {
     EMPTY_FIELD: {
         message: "*Please enter a valid field.",
         id: 5,
-        validate: validateString,
+        validate: emptyField,
+    },
+    INVALID_AMOUNT: {
+        message: "*Plase enter a positive amount greater than 0.",
+        id: 6,
+        property: "amount",
+        validate: validatePositiveAmount,
+    },
+    INVALID_DATE: {
+        message: "*Please enter a valid date.",
+        id: 7,
+        property: "date",
+        validate: validateDate,
+    },
+    INVALID_SOURCE: {
+        message: "*Please select a source.",
+        id: 8,
+        property: "source",
+        validate: emptyField,
+    },
+    INVALID_CATEGORY: {
+        message: "*Please select a category.",
+        id: 9,
+        property: "category",
+        validate: emptyField,
+    },
+    INVALID_DESCRIPTION: {
+        message: "*A short description will help you remember this transaction.",
+        id: 10,
+        property: "description",
+        validate: emptyField,
+    },
+    IS_NOT_A_NUMBER: {
+        message: "*Please enter a valid number.",
+        id: 11,
+        property: "amount",
+        validate: validateNumber,
+    },
+    AMOUNT_CERO: {
+        message: "*Please enter a valid amount.",
+        id: 12,
+        property: "amount",
+        validate: validatePositiveAmount,
     },
 };
 const handleErrors = (from, value) => {
@@ -69,6 +123,5 @@ export const validateFields = (fields) => {
         }
     }
 
-    console.log("validateFields", errors);
     return errors.filter((error) => error !== undefined);
 };

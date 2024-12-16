@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import ENV from "../../env.js";
 // import useStorage from "../../Hooks/useStorage";
@@ -8,9 +8,11 @@ import { extractFormData } from "../../utils/extractFormData";
 
 // import "./LoginForm.css";
 import { useAuthContext } from "../../Context/AuthContext.jsx";
+import { validateFields } from "../../utils/validateFields.js";
 const LoginForm = () => {
     const navigate = useNavigate();
     const { setIsAuthenticatedUser } = useAuthContext();
+    const [outputMessages, setOutputMessages] = useState([]);
 
     const handleLoginForm = async (e) => {
         try {
@@ -24,6 +26,13 @@ const LoginForm = () => {
             };
             const form_values_object = extractFormData(form_fields, form_values);
 
+            const errors = validateFields(form_values_object);
+
+            if (errors.length > 0) {
+                setOutputMessages(errors);
+                return;
+            }
+
             // TODO: One of this form variables saves if the remember checkbox is checked, manage to save the session
 
             const response = await POST(`${ENV.API_URL}/api/v1/auth/login`, {
@@ -32,21 +41,25 @@ const LoginForm = () => {
             });
 
             if (!response.ok) {
-                // TODO: SHOW ERROR MESSAGE HERE
-                console.log(response.payload.detail);
+                setOutputMessages(() => [{ message: response.payload.detail }]);
                 return;
             }
 
             const access_token = response.payload.token;
 
-            // console.log(response.payload);
             localStorage.setItem("access_token", access_token);
             localStorage.setItem("user_info", JSON.stringify(response.payload.user));
             setIsAuthenticatedUser(true);
             navigate("/");
         } catch (err) {
-            console.dir(err);
-            // TODO: SHOW ERROR MESSAGE HERE
+            if (err.message === "Failed to fetch") {
+                setOutputMessages(() => [{ message: "Our server is down, please try again in a few minutes" }]);
+                console.dir(err);
+            } else {
+                setOutputMessages(() => [{ message: err.message }]);
+                console.dir(err);
+                // TODO: SHOW ERROR MESSAGE HERE
+            }
         }
     };
     return (
@@ -78,6 +91,17 @@ const LoginForm = () => {
                 <div className="btn-container">
                     <button className="btn btn-signin">Sign In</button>
                 </div>
+                {outputMessages.length !== 0 && (
+                    <div className="output-messages-container">
+                        {outputMessages.map((message, index) => {
+                            return (
+                                <div className="output-message" key={index} style={{ color: message.color || "red" }}>
+                                    {message.message}
+                                </div>
+                            );
+                        })}
+                    </div>
+                )}
                 <div className="link-container">
                     <span>
                         New to Bancax?{" "}

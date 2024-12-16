@@ -13,7 +13,6 @@ const MovementsWindow = () => {
             <div className="movements-title">
                 <h2>Movements</h2>
             </div>
-            {/* TODO: ORDER MOVEMENTS BY DATE DESCENDING */}
             {isLoadingMovements ? <LoadingSpinner /> : <MovementsList movements={movementOrderedByDate} />}
         </div>
     );
@@ -37,15 +36,23 @@ const MovementCard = ({ movement }) => {
     const formattedDate = new Date(date).toLocaleDateString("es-AR");
 
     return (
-        <div className="movement-card">
-            <div>
-                <div>{formattedDate}</div>
-                <div style={amount > 0 ? { color: "green" } : { color: "red" }}>{amount}</div>
-                <div>{source}</div>
+        <div className="movement-card" style={amount > 0 ? { borderLeft: "6px solid green" } : { borderLeft: "6px solid red" }}>
+            <div className="left-side">
+                <div>
+                    <span className="date">{formattedDate}</span>
+                </div>
+                <div className="amount-source">
+                    <span className="amount">$ {amount}</span>
+                    <span className="source">{source}</span>
+                </div>
             </div>
-            <div>
-                <div>{category}</div>
-                <div>{description}</div>
+            <div className="right-side">
+                <div>
+                    <span className="category">{category}</span>
+                </div>
+                <div>
+                    <span className="description">{description}</span>
+                </div>
             </div>
         </div>
     );
