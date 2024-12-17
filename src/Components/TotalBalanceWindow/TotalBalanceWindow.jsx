@@ -34,7 +34,7 @@ const TotalBalanceWindow = () => {
         <div className="total-balance-window">
             <div className="total-balance">
                 <h3>Total balance</h3>
-                <span>$ {isLoadingMovements ? "..." : totalBalance}</span>
+                <span>$ {isLoadingMovements ? "..." : totalBalance.toLocaleString()}</span>
             </div>
             <div className="total-balance-details">
                 <h4>Details</h4>

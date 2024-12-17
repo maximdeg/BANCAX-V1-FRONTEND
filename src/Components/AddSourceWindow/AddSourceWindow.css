@@ -20,7 +20,25 @@
     border: var(--border-line);
     border-radius: 5px;
     margin-top: 10px;
+    height: 180px;
     overflow-y: auto;
+}
+
+.window-add-list-container .window-list-container .list-container::-webkit-scrollbar {
+    width: 5px;
+}
+
+.window-add-list-container .window-list-container .list-container::-webkit-scrollbar-track {
+    background: none;
+}
+
+.window-add-list-container .window-list-container .list-container::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: var(--primary-shadow-color);
+}
+
+.window-add-list-container .window-list-container .list-container::-webkit-scrollbar-thumb:hover {
+    background-color: var(--secondary-shadow-color);
 }
 
 .window-add-list-container .window-list-container .list-container .list {
@@ -49,10 +67,11 @@
     width: 15px;
     height: 15px;
     margin-right: 10px;
+    margin-top: 5px;
     background-color: transparent;
     border: none;
     cursor: pointer;
-    color: inherit;
+    color: red;
 }
 
 .window-add-list-container .window-list-container .list-container .list .list-item:last-child {
@@ -60,8 +79,9 @@
 }
 
 .window-add-list-container .window-list-container .list-container .list .list-item:hover {
-    background-color: var(--bg-secondary-color);
-    transform: scale(1.05);
+    background-color: var(--bg-secondary-color-lighter);
+    text-shadow: white 1px 1px 20px;
+    transform: scale3d(1.02, 1.02, 1.02);
 }
 
 .window-add-list-container .window-list-container .list-container .list .list-item:hover .btn-delete-channel {

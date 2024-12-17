@@ -29,7 +29,7 @@ function App() {
                         <Route index element={<HomePage />} />
                         <Route path="settings" element={<SettingsPage />} />
                         <Route path="movements" element={<MovementsPage />} />
-                        <Route path="profile/:id" element={<EditProfilePage />} />
+                        <Route path="profile/:user_id" element={<EditProfilePage />} />
                         <Route path="category-list" element={<CategoryListPage />} />
                     </Route>
                 </Route>

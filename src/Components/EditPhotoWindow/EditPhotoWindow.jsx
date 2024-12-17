@@ -1,18 +1,27 @@
 import React from "react";
+import { useForm } from "../../Hooks/useForm";
 
-const EditPhotoWindow = () => {
+const EditPhotoWindow = ({ user, handleForm }) => {
+    const form_fields = { photo: "" };
+    const { handleChangeInputValue } = useForm(form_fields);
+
+    const handleEdit = (e) => {
+        e.preventDefault();
+        handleForm(e, form_fields);
+    };
+
     return (
-        <div className="window">
+        <div className="window edit-profile-window">
             <h3>Photo</h3>
             <div className="user-img">
-                <img />
+                <img src={user.photo} alt="user" />
             </div>
-            <form>
+            <form className="form-group-user" onSubmit={(e) => handleEdit(e)}>
                 <div>
-                    <input type="file" name="photo" id="photo" />
+                    <input className="btn" type="file" name="photo" id="photo" onChange={handleChangeInputValue} />
                 </div>
-                <div>
-                    <button>Save</button>
+                <div className="btn-container">
+                    <button className="btn btn-save-picture">Save</button>
                 </div>
             </form>
         </div>

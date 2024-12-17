@@ -13,6 +13,7 @@ const SettingsPage = () => {
     const { activeSources, activeCategories } = getSourcesAndCategoriesFromStorage();
     const [sourcesListState, setSourcesListState] = useState(activeSources);
     const [categoriesListState, setCategoriesListState] = useState(activeCategories);
+    const [isLoading, setIsLoading] = useState(false);
 
     const setStates = (user, property) => {
         if (property === "sources") {
@@ -25,6 +26,8 @@ const SettingsPage = () => {
     const handleAddForm = async (e, property) => {
         try {
             e.preventDefault();
+
+            setIsLoading(true);
 
             const form_HTML = e.target;
             const form_values = new FormData(form_HTML);
@@ -42,6 +45,13 @@ const SettingsPage = () => {
                 headers: getAuthenticatedHeaders(),
                 body: JSON.stringify(user),
             });
+
+            if (!response.ok) {
+                setIsLoading(false);
+                return;
+            }
+
+            setIsLoading(false);
 
             const new_user_data = response.payload.detail.user;
 
@@ -89,6 +99,7 @@ const SettingsPage = () => {
                 handleDeleteItem={handleDeleteItem}
                 handleAddForm={handleAddForm}
                 list={sourcesListState}
+                isLoading={isLoading}
             />
             <AddSourceWindow
                 title="Category"
@@ -96,8 +107,9 @@ const SettingsPage = () => {
                 handleDeleteItem={handleDeleteItem}
                 handleAddForm={handleAddForm}
                 list={categoriesListState}
+                isLoading={isLoading}
             />
-            <ColorsConfigWindow />
+            {/* <ColorsConfigWindow /> */}
         </div>
     );
 };

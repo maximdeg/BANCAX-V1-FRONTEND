@@ -1,14 +1,11 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import ENV from "../../env.js";
-// import useStorage from "../../Hooks/useStorage";
 import { POST } from "../../fetching/http.fetching";
-import { getUnnauthenticatedHeaders } from "../../utils/Headers";
 import { extractFormData } from "../../utils/extractFormData";
-
-// import "./LoginForm.css";
 import { useAuthContext } from "../../Context/AuthContext.jsx";
 import { validateFields } from "../../utils/validateFields.js";
+import { getUnnauthenticatedHeaders } from "../../utils/Headers";
 const LoginForm = () => {
     const navigate = useNavigate();
     const { setIsAuthenticatedUser } = useAuthContext();

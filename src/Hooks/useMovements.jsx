@@ -10,7 +10,6 @@ const useMovements = () => {
     const [isLoadingMovements, setIsLoadingMovements] = useState(true);
     const [movements, setMovements] = useState([]);
     const [lastUpdated, setLastUpdated] = useState(Date.now());
-    // const [error, setError] = useState(null);
     const isInitialMountRef = useRef(true);
 
     const getMovements = async (id) => {

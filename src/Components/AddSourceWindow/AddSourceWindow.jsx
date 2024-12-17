@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import { ImBin2 } from "react-icons/im";
 
 import "./AddSourceWindow.css";
+import LoadingDots from "../LoadingDots/LoadingDots";
 
-const AddSourceWindow = ({ title, arrayPluralName, handleDeleteItem, handleAddForm, list }) => {
+const AddSourceWindow = ({ title, arrayPluralName, handleDeleteItem, handleAddForm, list, isLoading }) => {
     return (
-        <div className="window add-source-window">
+        <div className="window edit-profile-window">
             <h1>{arrayPluralName.split("")[0].toUpperCase() + arrayPluralName.split("").slice(1).join("")}</h1>
             <div className="window-add-list-container">
                 <div className="window-list-container">
@@ -19,13 +20,18 @@ const AddSourceWindow = ({ title, arrayPluralName, handleDeleteItem, handleAddFo
                             <label htmlFor="name">Name</label>
                             <input type="name" name="name" id="name" />
                         </div>
-                        {/* TODO: Add color picker properly */}
                         <div className="form-group">
                             <label htmlFor="color">Color</label>
                             <input type="color" name="color" id="color" />
                         </div>
                         <div className="btn-container">
-                            <button className="btn btn-signup">Add {title}</button>
+                            {isLoading ? (
+                                <button className="btn btn-signup">
+                                    <LoadingDots />
+                                </button>
+                            ) : (
+                                <button className="btn btn-signup">Add {title}</button>
+                            )}
                         </div>
                     </form>
                 </div>
