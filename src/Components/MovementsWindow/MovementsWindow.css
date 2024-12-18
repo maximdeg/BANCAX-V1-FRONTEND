@@ -83,6 +83,11 @@
     font-size: 12px;
 }
 
+.movement-card .right-side .description {
+    font-size: 10px;
+    color: grey;
+}
+
 @media screen and (max-width: 760px) {
     .movements-window {
         max-width: 90dvw;

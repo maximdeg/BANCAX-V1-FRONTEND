@@ -1,26 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ENV from "../../env";
 import { PUT } from "../../fetching/http.fetching";
 import { getAuthenticatedHeaders } from "../../utils/Headers";
+import { useGlobalContext } from "../../Context/GlobalContext";
 import EditNameWindow from "../../Components/EditNameWindow/EditNameWindow";
 import EditPhotoWindow from "../../Components/EditPhotoWindow/EditPhotoWindow";
 import EditPasswordWindow from "../../Components/EditPasswordWindow/EditPasswordWindow";
 
 import "./EditProfilePage.css";
-import { useGlobalContext } from "../../Context/GlobalContext";
-import { validateFields } from "../../utils/validateFields";
 
 const EditProfilePage = () => {
     const { getStorageUserInfo, setStorageUserInfo } = useGlobalContext();
     const [outputErrors, setOutputErrors] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
     const user = getStorageUserInfo();
 
     const handleForm = async (e, values) => {
         try {
-            setOutputErrors(() => validateFields(values));
-
-            if (outputErrors.length !== 0) return;
-
             for (const value in values) {
                 user[value] = values[value];
             }
@@ -32,16 +28,18 @@ const EditProfilePage = () => {
 
             if (response.status !== 200) {
                 setOutputErrors(() => [response.payload.detail]);
+                setIsLoading(false);
                 return;
             }
 
             const new_user_data = response.payload.detail.user;
-            console.log(new_user_data);
-            setOutputErrors(() => [{ message: "Profile updated succesfully", color: "green" }]);
 
+            setOutputErrors(() => [{ message: "Profile updated succesfully", color: "green" }]);
             setStorageUserInfo("user_info", new_user_data);
+            setIsLoading(false);
         } catch (err) {
             setOutputErrors(() => [{ message: err.message }]);
+            setIsLoading(false);
             console.log(err.message);
         }
     };
@@ -50,9 +48,23 @@ const EditProfilePage = () => {
         <div className="edit-profile-page">
             <h2>Edit profile</h2>
             <div className="containers">
-                <EditNameWindow user={user} handleForm={handleForm} outputErrors={outputErrors} setOutputErrors={setOutputErrors} />
-                <EditPasswordWindow user={user} handleForm={handleForm} outputErrors={outputErrors} setOutputErrors={setOutputErrors} />
-                <EditPhotoWindow user={user} handleForm={handleForm} outputErrors={outputErrors} setOutputErrors={setOutputErrors} />
+                <EditNameWindow
+                    user={user}
+                    handleForm={handleForm}
+                    outputErrors={outputErrors}
+                    isLoading={isLoading}
+                    setIsLoading={setIsLoading}
+                    setOutputErrors={setOutputErrors}
+                />
+                <EditPasswordWindow user={user} isLoading={isLoading} setIsLoading={setIsLoading} />
+                <EditPhotoWindow
+                    user={user}
+                    handleForm={handleForm}
+                    outputErrors={outputErrors}
+                    isLoading={isLoading}
+                    setOutputErrors={setOutputErrors}
+                    setIsLoading={setIsLoading}
+                />
             </div>
         </div>
     );

@@ -1,14 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import "./EditNameWindow.css";
 import { useForm } from "../../Hooks/useForm";
 import { extractFormData } from "../../utils/extractFormData";
+import { useGlobalContext } from "../../Context/GlobalContext";
+import LoadingDots from "../LoadingDots/LoadingDots";
 
-const EditNameWindow = ({ user, handleForm, outputErrors, setOutputErrors }) => {
+const EditNameWindow = ({ user, handleForm, outputErrors, setOutputErrors, isLoading, setIsLoading }) => {
     const form_fields = { fullname: "", email: "" };
     const { handleChangeInputValue } = useForm(form_fields);
 
     const handleEdit = (e) => {
         e.preventDefault();
+        setIsLoading(true);
+
         const form_HTML = e.target;
         const form_values = new FormData(form_HTML);
 
@@ -16,6 +20,7 @@ const EditNameWindow = ({ user, handleForm, outputErrors, setOutputErrors }) => 
         const { fullname, email } = form_values_object;
 
         if (!fullname && !email) {
+            setIsLoading(false);
             return setOutputErrors(() => [{ message: "*Please fill at least one field to save changes" }]);
         }
 
@@ -49,7 +54,13 @@ const EditNameWindow = ({ user, handleForm, outputErrors, setOutputErrors }) => 
                     <input type="email" name="email" id="email" placeholder={user.email} onChange={handleChangeInputValue} />
                 </div>
                 <div className="btn-container">
-                    <button className="btn btn-save-profile">Save</button>
+                    {isLoading ? (
+                        <button className="btn btn-save-profile">
+                            <LoadingDots />
+                        </button>
+                    ) : (
+                        <button className="btn btn-save-profile">Save</button>
+                    )}
                 </div>
             </form>
         </div>
