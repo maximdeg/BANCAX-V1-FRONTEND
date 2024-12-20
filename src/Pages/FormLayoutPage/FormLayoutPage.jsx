@@ -4,11 +4,13 @@ import "./FormLayoutPage.css";
 
 const FormLayoutPage = () => {
     return (
-        <section className="form-section">
-            <div className="form-container">
-                <Outlet />
-            </div>
-        </section>
+        <div className="background-picture">
+            <section className="form-section animation">
+                <div className="form-container">
+                    <Outlet />
+                </div>
+            </section>
+        </div>
     );
 };
 

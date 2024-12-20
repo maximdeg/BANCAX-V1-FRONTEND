@@ -74,10 +74,10 @@ const Sidebar = () => {
                             </div>
                         </li>
                         <li>
-                            <div to="/settings" className="link">
+                            <Link to="/settings" className="link">
                                 <FiSettings className="icon" />
                                 <span>Settings</span>
-                            </div>
+                            </Link>
                         </li>
                     </ul>
                 </nav>
