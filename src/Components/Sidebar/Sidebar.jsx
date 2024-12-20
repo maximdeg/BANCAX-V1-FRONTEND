@@ -15,7 +15,7 @@ const Sidebar = () => {
     const { isAuthenticatedUser, logout } = useAuthContext();
     const { fullname, id, photo } = JSON.parse(localStorage.getItem("user_info"));
     const edit_profile_url = `/profile/${id}`;
-    const photo_src = `/img/${photo}`;
+    const photo_src = photo ? photo : "https://cdn-icons-png.flaticon.com/512/3135/3135715.png";
 
     return (
         <aside className="aside-nav">
@@ -56,28 +56,28 @@ const Sidebar = () => {
                             </Link>
                         </li>
                         <li>
-                            <Link to="/circle-graphic" className="link">
+                            <div className="link">
                                 <FaCodiepie className="icon" />
                                 <span>Circle Graphic</span>
-                            </Link>
+                            </div>
                         </li>
                         <li>
-                            <Link to="/bars-graphic" className="link">
+                            <div className="link">
                                 <ImStatsBars className="icon" />
                                 <span>Bars Graphic</span>
-                            </Link>
+                            </div>
                         </li>
                         <li>
-                            <Link to="/xy-graphic " className="link">
+                            <div className="link">
                                 <VscGraphLine className="icon" />
                                 <span>Line Graphic</span>
-                            </Link>
+                            </div>
                         </li>
                         <li>
-                            <Link to="/settings" className="link">
+                            <div to="/settings" className="link">
                                 <FiSettings className="icon" />
                                 <span>Settings</span>
-                            </Link>
+                            </div>
                         </li>
                     </ul>
                 </nav>

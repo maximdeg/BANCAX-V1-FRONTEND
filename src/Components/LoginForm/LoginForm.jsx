@@ -6,14 +6,19 @@ import { extractFormData } from "../../utils/extractFormData";
 import { useAuthContext } from "../../Context/AuthContext.jsx";
 import { validateFields } from "../../utils/validateFields.js";
 import { getUnnauthenticatedHeaders } from "../../utils/Headers";
+import LoadingDots from "../LoadingDots/LoadingDots";
+
 const LoginForm = () => {
     const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(false);
     const { setIsAuthenticatedUser } = useAuthContext();
     const [outputMessages, setOutputMessages] = useState([]);
 
     const handleLoginForm = async (e) => {
         try {
             e.preventDefault();
+
+            setIsLoading(true);
 
             const form_HTML = e.target;
             const form_values = new FormData(form_HTML);
@@ -27,6 +32,7 @@ const LoginForm = () => {
 
             if (errors.length > 0) {
                 setOutputMessages(errors);
+                setIsLoading(false);
                 return;
             }
 
@@ -39,6 +45,7 @@ const LoginForm = () => {
 
             if (!response.ok) {
                 setOutputMessages(() => [{ message: response.payload.detail }]);
+                setIsLoading(false);
                 return;
             }
 
@@ -47,13 +54,16 @@ const LoginForm = () => {
             localStorage.setItem("access_token", access_token);
             localStorage.setItem("user_info", JSON.stringify(response.payload.user));
             setIsAuthenticatedUser(true);
+            setIsLoading(false);
             navigate("/");
         } catch (err) {
             if (err.message === "Failed to fetch") {
                 setOutputMessages(() => [{ message: "Our server is down, please try again in a few minutes" }]);
+                setIsLoading(false);
                 console.dir(err);
             } else {
                 setOutputMessages(() => [{ message: err.message }]);
+                setIsLoading(false);
                 console.dir(err);
                 // TODO: SHOW ERROR MESSAGE HERE
             }
@@ -86,7 +96,13 @@ const LoginForm = () => {
                     </Link>
                 </div>
                 <div className="btn-container">
-                    <button className="btn btn-signin">Sign In</button>
+                    {isLoading ? (
+                        <button className="btn btn-signin">
+                            <LoadingDots />
+                        </button>
+                    ) : (
+                        <button className="btn btn-signin">Sign In</button>
+                    )}
                 </div>
                 {outputMessages.length !== 0 && (
                     <div className="output-messages-container">

@@ -5,7 +5,7 @@
     align-items: center;
     min-width: 15dvw;
     width: 240px;
-    height: 100dvh;
+    height: 100%;
     border-right: var(--border-line);
     background: rgba(101, 185, 185, 0.12);
     background: linear-gradient(158deg, rgba(101, 185, 185, 1) 0%, rgba(75, 117, 117, 1) 0%, rgba(23, 20, 20, 1) 92%);
@@ -30,6 +30,7 @@
 .aside-nav .middle-container {
     display: flex;
     flex-direction: column;
+    position: sticky;
     width: 100%;
     height: 76dvh;
 }

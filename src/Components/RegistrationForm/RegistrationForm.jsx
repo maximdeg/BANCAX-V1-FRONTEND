@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import ENV from "../../env.js";
+import { Link } from "react-router-dom";
 import { useForm } from "../../Hooks/useForm";
 import { POST } from "../../fetching/http.fetching";
-import { Link, useNavigate } from "react-router-dom";
+import LoadingDots from "../LoadingDots/LoadingDots";
 import { validateFields } from "../../utils/validateFields";
 import { extractFormData } from "../../utils/extractFormData";
 import { getUnnauthenticatedHeaders } from "../../utils/Headers";
@@ -10,8 +11,8 @@ import { getUnnauthenticatedHeaders } from "../../utils/Headers";
 import "./RegistrationForm.css";
 
 const RegistrationForm = () => {
-    const navigate = useNavigate();
     const [outputMessages, setOutputMessages] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
     const form_fields = {
         fullname: "",
         email: "",
@@ -24,6 +25,8 @@ const RegistrationForm = () => {
     const handleSubmitRegisterForm = async (e) => {
         try {
             e.preventDefault();
+
+            setIsLoading(true);
             const form_HTML = e.target;
             const form_values = new FormData(form_HTML);
             const form_values_object = extractFormData(form_fields, form_values);
@@ -32,12 +35,13 @@ const RegistrationForm = () => {
 
             if (errors.length > 0) {
                 setOutputMessages(errors);
-                console.log("SIGN UP FORM", errors);
+                setIsLoading(false);
                 return;
             }
 
             if (form_values_object.password !== form_values_object.password_confirm) {
                 setOutputMessages((prevMessages) => [...prevMessages, { message: "Passwords do not match" }]);
+                setIsLoading(false);
                 return;
             }
 
@@ -47,14 +51,22 @@ const RegistrationForm = () => {
             });
 
             if (!response.ok) {
-                setOutputMessages((prevMessages) => [{ message: response.payload.message }]);
+                setOutputMessages((prevMessages) => [{ message: response.payload.detail }]);
+                setIsLoading(false);
                 return;
             }
 
-            setOutputMessages((prevMessages) => [{ color: "green", message: "Please open the verification link sent to your email." }]);
+            setOutputMessages((prevMessages) => [
+                { color: "green", message: "Verification email sent! Please open the verification link sent to your email." },
+            ]);
+            setIsLoading(false);
         } catch (err) {
             setOutputMessages((prevMessages) => [{ message: err.message }]);
+            setIsLoading(false);
             console.error(err.message);
+            if (err.message === "Failed to fetch") {
+                return setOutputMessages([{ message: "Server is not working well at the moment. Please try again later." }]);
+            }
         }
     };
 
@@ -84,7 +96,13 @@ const RegistrationForm = () => {
                     <input type="password" name="password_confirm" id="password_confirm" placeholder="********" onChange={handleChangeInputValue} />
                 </div>
                 <div className="btn-container">
-                    <button className="btn btn-signup">Send verification email</button>
+                    {isLoading ? (
+                        <button className="btn btn-signup">
+                            <LoadingDots />
+                        </button>
+                    ) : (
+                        <button className="btn btn-signup">Send verification email</button>
+                    )}
                 </div>
 
                 {outputMessages.length !== 0 && (

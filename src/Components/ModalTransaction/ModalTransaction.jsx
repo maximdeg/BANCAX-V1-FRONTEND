@@ -1,8 +1,9 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import ENV from "../../env";
 import { ImCross } from "react-icons/im";
 import { useForm } from "../../Hooks/useForm";
 import { POST } from "../../fetching/http.fetching";
+import LoadingDots from "../LoadingDots/LoadingDots";
 import CustomSelect from "../CustomSelect/CustomSelect";
 import { validateFields } from "../../utils/validateFields";
 import { extractFormData } from "../../utils/extractFormData";
@@ -20,6 +21,7 @@ const ModalTransaction = ({ label, setIsModalOpen }) => {
 
     const sourceOptions = activeSources.map((source) => ({ value: source.name, color: source.color, id: source._id }));
     const categoryOptions = activeCategories.map((category) => ({ value: category.name, color: category.color, id: category._id }));
+    const [isLoading, setIsLoading] = useState(false);
     const [outputMessages, setOutputMessages] = useState([]);
     const [outputErrors, setOutputErrors] = useState([]);
     const [selectedDate, setSelectedDate] = useState(today);
@@ -47,8 +49,12 @@ const ModalTransaction = ({ label, setIsModalOpen }) => {
     const handleChangeDate = (event) => {
         const date = new Date(event.target.value);
         const formattedDate = date.toISOString().split("T")[0];
-        console.log(formattedDate);
         setSelectedDate(formattedDate);
+    };
+
+    const setLoadingAndOutputStates = (message) => {
+        setOutputErrors(() => [...message]);
+        setIsLoading(true);
     };
 
     const handleTransactionForm = async (e) => {
@@ -59,17 +65,18 @@ const ModalTransaction = ({ label, setIsModalOpen }) => {
             const form_values = new FormData(form_HTML);
             const form_values_object = extractFormData(form_fields, form_values);
 
+            setIsLoading(true);
+
             form_values_object.user_id = id;
             form_values_object.source = selectedSourceState;
             form_values_object.category = selectedCategoryState;
-            form_values_object.amount = label === "Withdraw" ? form_values_object.amount - form_values_object.amount * 2 : form_values_object.amount;
             form_values_object.date = selectedDate.toString();
 
             const errors = validateFields(form_values_object);
-            console.log(errors);
+            form_values_object.amount = label === "Withdraw" ? form_values_object.amount - form_values_object.amount * 2 : form_values_object.amount;
 
             if (errors.length > 0) {
-                setOutputErrors(errors);
+                setLoadingAndOutputStates(errors);
                 return;
             }
 
@@ -79,11 +86,14 @@ const ModalTransaction = ({ label, setIsModalOpen }) => {
             });
 
             if (!response.ok) {
-                setOutputErrors(() => [{ message: response.payload.detail }]);
+                setLoadingAndOutputStates({ message: response.payload.detail });
                 return;
             }
 
+            console.log(response);
+
             setOutputErrors(() => []);
+            setIsLoading(false);
             setOutputMessages((prevMessages) => [
                 ...prevMessages,
                 {
@@ -94,9 +104,14 @@ const ModalTransaction = ({ label, setIsModalOpen }) => {
                     border: `3px solid ${sourceOptions.find((source) => source.value === response.payload.detail.source).color}`,
                 },
             ]);
+
+            form_HTML.reset();
         } catch (err) {
-            setOutputErrors(() => [{ message: err.message }]);
+            setLoadingAndOutputStates({ message: err.message });
             console.error(err.message);
+            if (err.message === "Failed to fetch") {
+                return setLoadingAndOutputStates("Server is not working well at the moment. Please try again later.");
+            }
         }
     };
 
@@ -163,7 +178,13 @@ const ModalTransaction = ({ label, setIsModalOpen }) => {
                                     <button className="cancelBtn" onClick={() => setIsModalOpen(false)}>
                                         Cancel
                                     </button>
-                                    <button className="submitBtn">Add deposit</button>
+                                    {isLoading ? (
+                                        <button type="button" className="submitBtn">
+                                            <LoadingDots />
+                                        </button>
+                                    ) : (
+                                        <button className="submitBtn">Add deposit</button>
+                                    )}
                                 </div>
                             </div>
                         </form>

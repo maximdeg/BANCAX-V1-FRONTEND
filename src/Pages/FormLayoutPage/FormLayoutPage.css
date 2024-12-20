@@ -18,3 +18,7 @@
     box-shadow: var(--shadow-box);
     background-color: var(--bg-form-color);
 }
+
+.form-container .registration-form .lds-ellipsis {
+    transform: translate(-45%, -80%);
+}

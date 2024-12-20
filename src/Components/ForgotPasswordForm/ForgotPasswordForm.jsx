@@ -64,7 +64,9 @@ const ForgotPasswordForm = () => {
             });
         } catch (err) {
             setOutputState([{ message: err.message }]);
-            console.dir(err);
+            if (err.message === "Failed to fetch") {
+                return setOutputState([{ message: "Server is not working well at the moment. Please try again later." }]);
+            }
         }
     };
     return (

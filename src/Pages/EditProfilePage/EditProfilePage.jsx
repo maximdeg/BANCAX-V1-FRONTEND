@@ -7,7 +7,7 @@ import EditNameWindow from "../../Components/EditNameWindow/EditNameWindow";
 import EditPhotoWindow from "../../Components/EditPhotoWindow/EditPhotoWindow";
 import EditPasswordWindow from "../../Components/EditPasswordWindow/EditPasswordWindow";
 
-import "./EditProfilePage.css";
+// import "./EditProfilePage.css";
 
 const EditProfilePage = () => {
     const { getStorageUserInfo, setStorageUserInfo } = useGlobalContext();
@@ -40,7 +40,9 @@ const EditProfilePage = () => {
         } catch (err) {
             setOutputErrors(() => [{ message: err.message }]);
             setIsLoading(false);
-            console.log(err.message);
+            if (err.message === "Failed to fetch") {
+                return setOutputErrors([{ message: "Server is not working well at the moment. Please try again later." }]);
+            }
         }
     };
 

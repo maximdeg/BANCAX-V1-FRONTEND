@@ -102,6 +102,12 @@ export const ERRORS = {
         property: "amount",
         validate: validatePositiveAmount,
     },
+    INVALID_PASSWORD: {
+        message: "*Please enter a password with at least 8 characters.",
+        id: 3,
+        property: "password_confirm",
+        validate: validatePassword,
+    },
 };
 const handleErrors = (from, value) => {
     for (const key in ERRORS) {

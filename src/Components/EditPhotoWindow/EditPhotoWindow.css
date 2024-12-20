@@ -1,0 +1,15 @@
+.user-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    margin: 10px;
+    border: 2px solid rgb(100, 100, 100);
+    overflow: hidden;
+}
+
+.user-img img {
+    width: 100%;
+}

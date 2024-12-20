@@ -1,15 +1,18 @@
 import React from "react";
+import ENV from "../../env";
+import { PUT } from "../../fetching/http.fetching";
+import { extractFormData } from "../../utils/extractFormData";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { getUnnauthenticatedHeaders } from "../../utils/Headers";
 
 import "./ResetPasswordForm.css";
-import { PUT } from "../../fetching/http.fetching";
-import { getUnnauthenticatedHeaders } from "../../utils/Headers";
-import { extractFormData } from "../../utils/extractFormData";
-import ENV from "../../env";
+import { validateFields } from "../../utils/validateFields";
 
 const ResetPasswordForm = () => {
     const { token } = useParams();
     const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState();
+    const [outputMessages, setOutputMessages] = useState();
 
     const fetchURL = async (data) => {
         try {
@@ -36,10 +39,32 @@ const ResetPasswordForm = () => {
             };
             const form_values_object = extractFormData(form_fields, form_values);
 
-            await fetchURL(form_values_object);
+            if (form_values_object.password !== form_values_object.password_confirm) {
+                setOutputMessages([{ message: "Passwords do not match." }]);
+                isLoading(false);
+                return;
+            }
+
+            const errors = validateFields(form_values_object);
+
+            if (errors.length > 0) {
+                setOutputMessages(errors);
+                isLoading(false);
+                return;
+            }
+
+            const response = await fetchURL(res, form_values_object);
+
+            if (!response.ok) {
+                setOutputMessages({ message: response.payload.detail });
+                isLoading(false);
+                return;
+            }
 
             navigate("/in/login");
         } catch (err) {
+            setOutputMessages({ message: err.message });
+            isLoading(false);
             console.error(err.message);
         }
     };
@@ -62,8 +87,25 @@ const ResetPasswordForm = () => {
                     <input type="password" name="password_confirm" id="password_confirm" placeholder="********" />
                 </div>
                 <div className="btn-container">
-                    <button className="btn btn-signin">Confirm</button>
+                    {isLoading ? (
+                        <button className="btn btn-signin">
+                            <LoadingDots />
+                        </button>
+                    ) : (
+                        <button className="btn btn-signin">Confirm</button>
+                    )}
                 </div>
+                {outputMessages.length !== 0 && (
+                    <div className="output-messages-container">
+                        {outputMessages.map((message, index) => {
+                            return (
+                                <div className="output-message" key={index} style={{ color: message.color || "red" }}>
+                                    {message.message}
+                                </div>
+                            );
+                        })}
+                    </div>
+                )}
                 <div className="link-container">
                     <span>
                         Already have an account?{" "}

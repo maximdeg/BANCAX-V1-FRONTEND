@@ -26,7 +26,7 @@ const EditPasswordWindow = ({ user, isLoading, setIsLoading }) => {
                 body: JSON.stringify({ email: user.email, password: current_password }),
             });
 
-            if (response.status !== 200) {
+            if (!response.ok) {
                 setMessageAndLoadingOff(response.payload.detail || "Server is not working well at the moment. Please try again later.");
                 return false;
             }
@@ -34,6 +34,9 @@ const EditPasswordWindow = ({ user, isLoading, setIsLoading }) => {
             return true;
         } catch (err) {
             setMessageAndLoadingOff(err.message);
+            if (err.message === "Failed to fetch") {
+                return setMessageAndLoadingOff("Server is not working well at the moment. Please try again later.");
+            }
         }
     };
 
@@ -75,7 +78,7 @@ const EditPasswordWindow = ({ user, isLoading, setIsLoading }) => {
             setOutputErrors(() => [{ message: "Password changed successfully", color: "green" }]);
             setIsLoading(false);
         } catch (err) {
-            console.dir(err.message);
+            console.dir(err);
             return setMessageAndLoadingOff(err.message);
         }
     };

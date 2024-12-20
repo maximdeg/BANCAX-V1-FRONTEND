@@ -159,9 +159,9 @@ const MovementsByMonth = ({ list }) => {
                                     </a>
                                 </li>
                                 <li>{item.total_movements}</li>
-                                <li>${item.income}</li>
-                                <li>${item.spent}</li>
-                                <li>${item.total_amount}</li>
+                                <li>${item.income.toFixed(2)}</li>
+                                <li>${item.spent.toFixed(2)}</li>
+                                <li>${item.total_amount.toFixed(2)}</li>
                             </ul>
                         </article>
                     </section>
@@ -187,7 +187,7 @@ const CategoryList = ({ list }) => {
                         <article className="row fadeIn list-item" style={{ borderLeft: `6px solid ${item.color}` }}>
                             <ul key={item._id}>
                                 <li style={{ textShadow: `2px 4px 5px ${item.color}` }}>{item.name}</li>
-                                <li>${item.total_amount}</li>
+                                <li>${item.total_amount.toFixed(2)}</li>
                             </ul>
                         </article>
                     </section>
@@ -219,9 +219,9 @@ const MovementsByYear = ({ list }) => {
                                     <a href="#">{item.year}</a>
                                 </li>
                                 <li>{item.total_movements}</li>
-                                <li>${item.income}</li>
-                                <li>${item.spent}</li>
-                                <li>${item.total_amount}</li>
+                                <li>${item.income.toFixed(2)}</li>
+                                <li>${item.spent.toFixed(2)}</li>
+                                <li>${item.total_amount.toFixed(2)}</li>
                             </ul>
                         </article>
                     </section>
