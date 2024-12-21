@@ -20,6 +20,10 @@
     width: 180px;
 }
 
+.header .movement-buttons .btn-withdraw {
+    margin-left: 20px;
+}
+
 .header .movement-buttons button {
     background-color: var(--bg-primary-color);
 }

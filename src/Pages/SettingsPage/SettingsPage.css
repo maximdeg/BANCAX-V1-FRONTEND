@@ -9,3 +9,9 @@
     height: 100%;
     gap: 20px;
 }
+
+@media screen and (max-width: 760px) {
+    .settings-page {
+        padding: 15px 10% 40px 10%;
+    }
+}

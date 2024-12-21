@@ -86,7 +86,7 @@ const EditPhotoWindow = ({ user, outputErrors, setOutputErrors, isLoading, setIs
             <form className="form-group-user" onSubmit={(e) => handleEdit(e)}>
                 <div>
                     <input
-                        className="btn"
+                        className="btn btn-choose-file"
                         type="file"
                         name="image_base_64"
                         id="photo"

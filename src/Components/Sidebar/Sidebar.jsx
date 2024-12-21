@@ -37,7 +37,7 @@ const Sidebar = () => {
                 </div>
                 <nav className="nav-menu">
                     <ul>
-                        <li>
+                        <li data-toolip="Total balance and tutorial">
                             <Link to="/" className="link">
                                 <FaHouse className="icon" />
                                 <span>Home</span>

@@ -140,11 +140,11 @@ const MovementsByMonth = ({ list }) => {
         <section className="wrapper">
             <main className="row title">
                 <ul>
-                    <li>Year/Month</li>
-                    <li>Movements</li>
-                    <li>Income</li>
-                    <li>Spent</li>
-                    <li>Total</li>
+                    <li key="0">Year/Month</li>
+                    <li key="1">Movements</li>
+                    <li key="2">Income</li>
+                    <li key="3">Spent</li>
+                    <li key="4">Total</li>
                 </ul>
             </main>
 
