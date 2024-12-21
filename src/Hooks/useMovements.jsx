@@ -21,7 +21,6 @@ const useMovements = () => {
             if (response.ok) {
                 setMovements(() => response.payload.transactions);
                 setIsLoadingMovements(() => false);
-                console.log("MOVEMENTS UPDATED");
             }
         } catch (err) {
             console.log(err.message);
@@ -31,7 +30,6 @@ const useMovements = () => {
 
     const updateMovements = () => {
         if (isInitialMountRef.current) {
-            console.log("UPDATING MOVEMENTS");
             getMovements(id);
             isInitialMountRef.current = false;
         }

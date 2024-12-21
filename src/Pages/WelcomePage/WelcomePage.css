@@ -1,6 +1,6 @@
 .gradient-animation-background {
     width: 100%;
-    height: 95%;
+    height: 93dvh;
     background: linear-gradient(-45deg, var(--bg-primary-color), #382388, var(--primary-shadow-color), #450965);
     background-size: 400% 400%;
     animation: gradient 15s ease infinite;
@@ -12,7 +12,7 @@
     justify-content: flex-end;
     align-items: center;
     padding: 0px 20px;
-    width: 100dvw;
+    width: 100%;
     height: 4em;
     border-bottom: var(--border-line);
     background-color: var(--bg-secondary-color);
@@ -61,21 +61,22 @@
 
 .main {
     display: flex;
-    /* align-items: center; */
     justify-content: center;
 }
 
 .main .home-title {
     display: flex;
     flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
+    align-items: flex-end;
+    /* justify-content: center; */
+    /* margin: 30px; */
     gap: 20px;
-    height: 80dvh;
+    height: 80%;
     width: 70dvw;
     color: var(--text-color);
-    margin-top: 20px;
-    max-width: 1470px;
+    /* margin-top: 20px; */
+    max-width: 1400px;
+    /* border: 3px solid red; */
 }
 
 .main .home-title .main-title {
@@ -101,6 +102,11 @@
     align-items: center;
     justify-content: space-around;
     max-width: fit-content;
+    border: var(--border-line);
+    margin-left: 50px;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: var(--bg-secondary-color-transparent-more);
     /* align-self: flex-end; */
 }
 
@@ -110,7 +116,7 @@
     align-items: center;
     justify-content: space-around;
     font-size: 1.5rem;
-    text-align: right;
+    text-align: center;
     text-wrap: pretty;
 }
 
@@ -136,7 +142,7 @@
     }
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1300px) {
     .welcome-header .buttons-container {
         margin-right: 20px;
     }
@@ -150,8 +156,13 @@
     }
 
     .main .home-title {
+        border: 3px solid red;
         flex-direction: column;
-        justify-content: space-around;
+        align-items: flex-start;
+        justify-content: center;
+        width: 60dvw;
+        height: 100%;
+
         gap: 20px;
     }
 
@@ -171,6 +182,10 @@
         display: flex;
         flex-direction: column;
         font-size: 2rem;
+    }
+
+    .main .home-title .main-description {
+        margin-left: 0px;
     }
 
     .main .home-title .main-description .main-description-text {
@@ -199,6 +214,7 @@
         display: flex;
         flex-direction: column;
         margin-top: 6rem;
+        font-size: 3.5rem;
     }
 
     .main .home-title .main-title h1 {
@@ -214,6 +230,12 @@
 
     .main .home-title .main-description .main-description-text {
         font-size: 0.9rem;
+    }
+}
+
+@media screen and (max-width: 688px) {
+    .main .home-title .main-title {
+        font-size: 3rem;
     }
 }
 

@@ -8,6 +8,7 @@
 
 .form-section {
     display: flex;
+    justify-content: flex-start;
     width: 100dvw;
     height: 100dvh;
 }
@@ -15,11 +16,11 @@
 .form-section .form-container {
     display: flex;
     justify-self: flex-start;
-    min-width: 280px;
+    min-width: 320px;
     width: 25dvw;
     margin: 20px;
-    border: var(--border-line);
     border-radius: 8px;
+    border: var(--border-line);
     box-shadow: var(--shadow-box);
     background-color: var(--bg-form-color);
 }
@@ -46,5 +47,15 @@
     }
     100% {
         background-position: 0% 50%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .form-section {
+        justify-content: center;
+    }
+
+    .form-section .form-container {
+        min-width: 300px;
     }
 }

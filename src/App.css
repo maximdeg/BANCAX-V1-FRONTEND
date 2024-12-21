@@ -8,6 +8,8 @@
     --bg-primary-color: #1a1d1d;
     --bg-secondary-color: #171414;
     --bg-secondary-color-transparent: #171414bc;
+    --bg-secondary-color-transparent-more: #1714143b;
+
     --bg-secondary-color-lighter: #635a5abc;
     --primary-shadow-color: #65b9b9;
     --secondary-shadow-color: rgba(0, 255, 55, 0.885);
@@ -32,6 +34,12 @@
     /* font-family: "Starjedi", sans-serif; */
     /* width: 100dvw;
     height: 100dvh; */
+}
+
+body {
+    scroll-behavior: smooth;
+    width: 100%;
+    height: 100%;
 }
 
 /* GLOBAL STYLES */
@@ -66,12 +74,12 @@
 .form-group input {
     width: 100%;
     padding-left: 5px;
-    height: 25px;
+    height: 30px;
     border: var(--border-line);
     border-radius: 3px;
     background-color: var(--bg-secondary-color);
     color: rgb(190, 190, 190);
-    font-size: 12px;
+    font-size: 14px;
     outline: none;
 }
 
@@ -103,7 +111,7 @@
 
 .logo-container {
     width: 100%;
-    height: 4rem;
+    height: 5rem;
     overflow: hidden;
 }
 .logo-container img {

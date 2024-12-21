@@ -3,7 +3,6 @@ import { useLocation } from "react-router-dom";
 
 const LoadingSpinner = () => {
     const { pathname } = useLocation();
-    console.log(pathname);
 
     return (
         <div className={pathname === "/movements" ? "loading-page movements" : "loading-page"}>

@@ -75,7 +75,3 @@ const Main = () => {
         </section>
     );
 };
-
-const Footer = () => {
-    return <footer>Footer</footer>;
-};

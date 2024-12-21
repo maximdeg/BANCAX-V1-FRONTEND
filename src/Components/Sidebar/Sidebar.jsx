@@ -96,7 +96,10 @@ const Sidebar = () => {
                     </>
                 )}
             </div>
-            <div className="bottom-container"></div>
+            <div className="bottom-container">
+                <img src="https://res.cloudinary.com/djdnlogf1/image/upload/v1734110512/small-logo_f0jlfh.png" alt="bancax-small-logo" />
+                <span className="version">Version 1.0.0</span>
+            </div>
         </aside>
     );
 };
