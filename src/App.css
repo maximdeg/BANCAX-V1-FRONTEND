@@ -22,7 +22,7 @@
     --shadow-box: 0px 0px 5px 3px var(--primary-shadow-color);
     --hover-shadow-box: 0px 0px 5px 3px var(--secondary-shadow-color);
     --border-line: 1px solid rgba(139, 139, 139, 0.433);
-
+    --color: #f50c0c;
     --bg-form-color: #1a1d1dad;
 }
 

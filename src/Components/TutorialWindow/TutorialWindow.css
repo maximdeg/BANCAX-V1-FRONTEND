@@ -1,0 +1,36 @@
+.tutorial-window {
+    flex-direction: column;
+    width: 100%;
+    min-width: 30dvw;
+    max-width: 35dvw;
+    padding: 20px;
+}
+
+.tutorial-window h1 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.tutorial-window p {
+    text-wrap: pretty;
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+.tutorial-window .tutorial-link {
+    border: var(--border-line);
+    border-radius: 5px;
+    padding: 1px 5px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: ease-in-out 0.2s all;
+}
+
+.tutorial-window .tutorial-link:hover {
+    background-color: var(--primary-shadow-color);
+}
+
+.tutorial-window .text-shadow {
+    text-shadow: 0px -1px 5px var(--secondary-shadow-color);
+}

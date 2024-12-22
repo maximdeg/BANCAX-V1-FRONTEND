@@ -150,6 +150,16 @@
     padding-right: 3px;
 }
 
+.disabled {
+    pointer-events: none;
+    color: grey;
+    text-decoration: none;
+}
+
+.nav-menu .link {
+    text-decoration: none;
+}
+
 @media screen and (max-width: 760px) {
     .layout-container .aside-nav {
         display: none;

@@ -5,7 +5,7 @@ import { TbCashRegister } from "react-icons/tb";
 import { BiCategoryAlt } from "react-icons/bi";
 import { ImStatsBars } from "react-icons/im";
 import { VscGraphLine } from "react-icons/vsc";
-import { FiSettings } from "react-icons/fi";
+import { RxGear } from "react-icons/rx";
 
 import { Link } from "react-router-dom";
 
@@ -56,26 +56,26 @@ const Sidebar = () => {
                             </Link>
                         </li>
                         <li>
-                            <div className="link">
+                            <div className="link disabled">
                                 <FaCodiepie className="icon" />
                                 <span>Circle Graphic</span>
                             </div>
                         </li>
                         <li>
-                            <div className="link">
+                            <div className="link disabled">
                                 <ImStatsBars className="icon" />
                                 <span>Bars Graphic</span>
                             </div>
                         </li>
                         <li>
-                            <div className="link">
+                            <div className="link disabled">
                                 <VscGraphLine className="icon" />
                                 <span>Line Graphic</span>
                             </div>
                         </li>
                         <li>
                             <Link to="/settings" className="link">
-                                <FiSettings className="icon" />
+                                <RxGear className="icon" />
                                 <span>Settings</span>
                             </Link>
                         </li>
