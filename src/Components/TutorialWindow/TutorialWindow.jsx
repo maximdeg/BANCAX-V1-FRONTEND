@@ -47,7 +47,7 @@ const TutorialWindow = () => {
                     </strong>
                 </Link>{" "}
                 and
-                <Link to="/movements" className="link tutorial-link" style={{ marginTop: "3px" }}>
+                <Link to="/category-list" className="link tutorial-link" style={{ marginTop: "3px" }}>
                     <strong>
                         <i>Category</i>
                     </strong>

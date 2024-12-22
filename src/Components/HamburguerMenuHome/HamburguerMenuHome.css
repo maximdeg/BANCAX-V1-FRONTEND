@@ -49,13 +49,16 @@
 
 /* Morph shape necessary with bubble or elastic */
 .welcome-header .bm-morph-shape {
+    /* align-items: end;
+    justify-items: end;
+    border: 3px solid red; */
     fill: #373a47;
 }
 
 /* Wrapper for item list */
 .welcome-header .bm-item-list {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     flex-direction: column;
     justify-content: flex-start;
     gap: 15px;

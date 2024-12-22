@@ -37,7 +37,7 @@ const TotalBalanceWindow = () => {
                 <span>$ {isLoadingMovements ? "..." : totalBalance.toLocaleString()}</span>
             </div>
             <div className="total-balance-details">
-                <h4>Details</h4>
+                <h4>Balance per source</h4>
                 <ul>
                     {sourceTotals.map((source) => (
                         <li key={source.source}>

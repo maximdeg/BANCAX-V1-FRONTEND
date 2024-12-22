@@ -6,7 +6,7 @@ import "./HamburguerMenuHome.css";
 
 export default function HamburguerMenuHome({ isOpen }) {
     return (
-        <Menu isOpen={isOpen} width={"150px"} right customBurgerIcon={<BurguerIcon isOpen={isOpen} />}>
+        <Menu isOpen={isOpen} width={"160px"} right customBurgerIcon={<BurguerIcon isOpen={isOpen} />}>
             <Link to="/in/login">
                 <button className="btn btn-login">Login</button>
             </Link>

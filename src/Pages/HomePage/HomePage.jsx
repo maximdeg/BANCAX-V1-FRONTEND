@@ -8,7 +8,7 @@ const HomePage = () => {
     return (
         <section className="home-section">
             <TotalBalanceWindow />
-            <TutorialWindow></TutorialWindow>
+            <TutorialWindow />
         </section>
     );
 };

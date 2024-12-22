@@ -30,7 +30,21 @@ const validateNumber = (value) => {
     return !isNaN(value);
 };
 
+const emptySource = (value) => {
+    return value !== "Select a source";
+};
+
+const emptyCategory = (value) => {
+    return value !== "Select a category";
+};
+
 export const ERRORS = {
+    IS_NOT_A_NUMBER: {
+        message: "*Please enter a valid number as amount.",
+        id: 11,
+        property: "amount",
+        validate: validateNumber,
+    },
     FULLNAME_LENGTH: {
         message: "*Please enter a valid first name and last name.",
         id: 1,
@@ -78,11 +92,23 @@ export const ERRORS = {
         property: "source",
         validate: emptyField,
     },
+    INVALID_SOURCE_PICK: {
+        message: "*Please select a source.",
+        id: 16,
+        property: "source",
+        validate: emptySource,
+    },
     INVALID_CATEGORY: {
         message: "*Please select a category.",
         id: 9,
         property: "category",
         validate: emptyField,
+    },
+    INVALID_CATEGORY_PICK: {
+        message: "*Please select a category.",
+        id: 20,
+        property: "category",
+        validate: emptyCategory,
     },
     INVALID_DESCRIPTION: {
         message: "*A short description will help you remember this transaction.",
@@ -90,12 +116,7 @@ export const ERRORS = {
         property: "description",
         validate: emptyField,
     },
-    IS_NOT_A_NUMBER: {
-        message: "*Please enter a valid number.",
-        id: 11,
-        property: "amount",
-        validate: validateNumber,
-    },
+
     AMOUNT_CERO: {
         message: "*Please enter a valid amount.",
         id: 12,

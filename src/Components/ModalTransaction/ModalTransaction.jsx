@@ -25,8 +25,8 @@ const ModalTransaction = ({ label, setIsModalOpen }) => {
     const [outputMessages, setOutputMessages] = useState([]);
     const [outputErrors, setOutputErrors] = useState([]);
     const [selectedDate, setSelectedDate] = useState(today);
-    const [selectedSourceState, setSelectedSourceState] = useState(sourceOptions[0]);
-    const [selectedCategoryState, setSelectedCategoryState] = useState(categoryOptions[0]);
+    const [selectedSourceState, setSelectedSourceState] = useState("");
+    const [selectedCategoryState, setSelectedCategoryState] = useState("");
 
     const form_fields = {
         amount: "",
@@ -54,7 +54,7 @@ const ModalTransaction = ({ label, setIsModalOpen }) => {
 
     const setLoadingAndOutputStates = (message) => {
         setOutputErrors(() => [...message]);
-        setIsLoading(true);
+        setIsLoading(false);
     };
 
     const handleTransactionForm = async (e) => {
