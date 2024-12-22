@@ -4,6 +4,8 @@
     min-width: 30dvw;
     max-width: 35dvw;
     padding: 20px;
+    margin-bottom: 30px;
+    /* height: 600px; */
 }
 
 .tutorial-window h1 {
@@ -33,4 +35,12 @@
 
 .tutorial-window .text-shadow {
     text-shadow: 0px -1px 5px var(--secondary-shadow-color);
+}
+
+@media screen and (max-width: 760px) {
+    .tutorial-window {
+        min-width: 70dvw;
+        max-width: 90dvw;
+        margin-bottom: 30%;
+    }
 }
