@@ -1,0 +1,16 @@
+.delete-user-window {
+    display: flex;
+    align-content: center;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.delete-user-window h1 {
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.delete-user-window .btn-delete-user {
+    margin-left: 10px;
+    background-color: rgb(182, 20, 20);
+}
