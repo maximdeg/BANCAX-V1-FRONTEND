@@ -1,9 +1,8 @@
 import React from "react";
-import { useForm } from "../../Hooks/useForm";
-import LoadingDots from "../LoadingDots/LoadingDots";
-import { PUT } from "../../fetching/http.fetching";
-import { getAuthenticatedHeaders } from "../../utils/Headers";
 import ENV from "../../env";
+import { PUT } from "../../fetching/http.fetching";
+import LoadingDots from "../LoadingDots/LoadingDots";
+import { getAuthenticatedHeaders } from "../../utils/Headers";
 import { useGlobalContext } from "../../Context/GlobalContext";
 import "./EditPhotoWindow.css";
 
@@ -36,12 +35,14 @@ const EditPhotoWindow = ({ user, outputErrors, setOutputErrors, isLoading, setIs
 
     const handleForm = async (e) => {
         try {
+            setIsLoading(true);
+
             const response = await PUT(`${ENV.API_URL}/api/v1/users/upload-photo/${user.id}`, {
                 headers: getAuthenticatedHeaders(),
                 body: JSON.stringify({ photo: imageBase64 }),
             });
 
-            if (response.status !== 200) {
+            if (!response.ok) {
                 setOutputErrors(() => [response.payload.detail]);
                 setIsLoading(false);
                 return;
@@ -63,7 +64,6 @@ const EditPhotoWindow = ({ user, outputErrors, setOutputErrors, isLoading, setIs
     const handleEdit = (e) => {
         e.preventDefault();
         handleForm(e);
-        // FIXME: FORM_FIELDS IS NOT DEFINED
     };
 
     return (
